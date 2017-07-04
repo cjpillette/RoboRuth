@@ -1,6 +1,5 @@
 const express = require('express')
 const Company = require('../models/company')
-const Inspection = require('../models/inspection')
 const Booking = require('../models/booking')
 
 const router = express.Router()

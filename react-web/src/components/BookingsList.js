@@ -9,7 +9,7 @@ export default function BookingsList({
     {
       items.map(item => (
         <Booking
-          key={ item._id }
+          // key={ item._id }
           { ...item }
           showLink
         />

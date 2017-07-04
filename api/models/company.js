@@ -1,4 +1,5 @@
-const mongoose = require('./init')
+const mongoose = require('../db/db')
+
 
 const companySchema = mongoose.Schema({
     name: String,

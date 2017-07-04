@@ -1,5 +1,6 @@
 const passportLocalMongoose = require('passport-local-mongoose')
-const mongoose = require('./init')
+const mongoose = require('../db/db')
+
 
 const userSchema = mongoose.Schema({})
 // Add email, password hash, salt, etc fields to our user schema

@@ -55,7 +55,7 @@ class App extends Component {
             } />
             <Route path='/bookings' render={
               () => (
-                <BookingsPage bookings={ bookings } />
+                <BookingsPage bookings={ bookings } onCreateBooking ={this.handleCreateBooking} />
               )
             } />
             <Route render={

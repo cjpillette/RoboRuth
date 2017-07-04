@@ -6,8 +6,14 @@ function submitCreate(event, onCreate) {
     event.preventDefault()
 
     const form = event.target
-    const bookingValues = readAndClearForm(form)
-    onCreate(bookingValues)
+    const startTime = form.elements['startTime'].value
+    const inspectionType = form.elements['inspectionType'].value
+    const entryNumber = form.elements['entryNumber'].value
+    const attachment = form.elements['attachment'].value
+    const noteToOfficer = form.elements['noteToOfficer'].value
+    // const bookingValues = readAndClearForm(form)
+    // onCreate(bookingValues)
+    onCreate({startTime, inspectionType, entryNumber, attachment, noteToOfficer})
 }
 
 export default function CreateBookingForm({
