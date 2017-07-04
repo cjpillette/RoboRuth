@@ -1,0 +1,43 @@
+GET http://localhost:7000/movies
+
+###
+
+GET http://localhost:7000/movies/notFound
+
+###
+
+GET http://localhost:7000/movies/5946666eb53f55bd1cf5fc02
+
+###
+
+POST http://localhost:7000/movies
+content-type: application/json
+
+{
+    "title": "Wonder Woman",
+    "yearReleased": 2017,
+    "writers": [
+        {
+            "person": "59488fcd62352416ee357668",
+            "role": "Screenplay"
+        }
+    ]
+}
+
+###
+
+PUT http://localhost:7000/movies/59488fe6e9229717522a8725
+content-type: application/json
+
+{
+    "cast": [
+        {
+            "person": "5948b5b8173a96101000517e",
+            "role": "Princess Diana"
+        }
+    ]
+}
+
+###
+
+DELETE http://localhost:7000/movies/5947c7d64da11b4e43bf3474

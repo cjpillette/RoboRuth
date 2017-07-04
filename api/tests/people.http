@@ -1,0 +1,21 @@
+GET http://localhost:7000/people
+
+###
+
+GET http://localhost:7000/people/notFound
+
+###
+
+GET http://localhost:7000/people/5946666eb53f55bd1cf5fc02
+
+###
+
+POST http://localhost:7000/people
+content-type: application/json
+
+{
+    "firstName": "Gal",
+    "lastName": "Gadot"
+}
+
+
