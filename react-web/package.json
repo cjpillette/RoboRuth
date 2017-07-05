@@ -8,9 +8,11 @@
     "react": "^15.6.1",
     "react-a11y": "^0.3.4",
     "react-addons-css-transition-group": "^15.6.0",
+    "react-big-calendar": "^0.14.4",
     "react-bootstrap-time-picker": "^1.0.3",
     "react-dom": "^15.6.1",
     "react-infinite-calendar": "^2.3.1",
+    "react-modal": "^2.2.1",
     "react-router-dom": "^4.1.1"
   },
   "devDependencies": {

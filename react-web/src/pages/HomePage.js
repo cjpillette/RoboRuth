@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import moment from 'moment'
 import InfiniteCalendar from 'react-infinite-calendar'
 import 'react-infinite-calendar/styles.css'
+import TimeSlotModal from '../components/TimeSlotModal'
 
 const HomePage = ({
     // props
@@ -13,6 +14,7 @@ const HomePage = ({
   return (
     <div>
       <h2>Make a Booking</h2>
+        <TimeSlotModal />
         <InfiniteCalendar
           width={400}
           height={600}
@@ -30,8 +32,8 @@ const HomePage = ({
                 default: '#333',
                 active: '#FFF'
               },
-              weekdayColor: 'rgb(146, 118, 255)',
-              headerColor: 'rgb(127, 95, 251)',
+              weekdayColor: 'rgb(250, 201, 0)',
+              headerColor: 'rgb(243, 134, 18)',
               floatingNav: {
                 background: 'rgba(81, 67, 138, 0.96)',
                 color: '#FFF',

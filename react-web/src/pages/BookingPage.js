@@ -1,7 +1,7 @@
 import React from 'react'
 import Booking from '../components/Booking'
 
-export default function MoviePage({
+export default function BookingPage({
     booking
 }) {
     return (
