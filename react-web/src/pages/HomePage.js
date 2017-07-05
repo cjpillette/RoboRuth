@@ -35,9 +35,9 @@ const HomePage = ({
               weekdayColor: 'rgb(250, 201, 0)',
               headerColor: 'rgb(243, 134, 18)',
               floatingNav: {
-                background: 'rgba(81, 67, 138, 0.96)',
+                background: 'rgba(243, 134, 18, 0.96)',
                 color: '#FFF',
-                chevron: '#FFA726'
+                chevron: '#000'
               }
             }}
         />
