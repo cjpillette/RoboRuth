@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import TimePicker from 'react-bootstrap-time-picker'
 
 export default function Booking({
   _id,
@@ -15,6 +16,7 @@ export default function Booking({
     <article>
       <h2>
         <small>{ startTime }</small>
+        <TimePicker start="08:30" end="15:00" step={30} />
         <Link to={ `/bookings/${_id}` }>
           { inspectionType }
           { ' '}
