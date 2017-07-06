@@ -14,18 +14,12 @@ class MainCalendar extends React.Component {
 
 //functions
 onStandaloneSelect = (daySelected) => {
-  alert(daySelected)
-  this.setState({daySelected})
+  this.setState({daySelected, modalIsOpen: true})
 }
 
 openModal = () => {
   this.setState({modalIsOpen: true});
 }
-
-// afterOpenModal = () => {
-//   // references are now sync'd and can be accessed.
-//   this.subtitle.style.color = '#f00';
-// }
 
 closeModal = () => {
   this.setState({modalIsOpen: false});
@@ -40,14 +34,13 @@ closeModal = () => {
           <TimeSlotModal
             daySelected={this.state.daySelected}
             modalIsOpen={this.state.modalIsOpen}
-            // afterOpenModal={this.afterOpenModal}
             closeModal={this.closeModal}
           />
           <InfiniteCalendar
             width={400}
             height={600}
             selected={today}
-            onSelect={this.onStandaloneSelect, this.openModal}
+            onSelect={this.onStandaloneSelect}
             minDate={lastWeek}
             locale={{
               weekStartsOn: 1

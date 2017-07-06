@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
+import moment from 'moment'
 import TimeSlot from '../components/TimeSlot'
 
 const customStyles = {
@@ -20,16 +21,16 @@ const customStyles = {
 class TimeSlotModal extends React.Component {
 
   render() {
+    const dateSelected = moment(this.props.daySelected).format("LL").toString();
     return (
       <div>
         <Modal
           isOpen={this.props.modalIsOpen}
-          // onAfterOpen={this.props.afterOpenModal}
           onRequestClose={this.props.closeModal}
           style={customStyles}
           contentLabel="Hours available for booking"
         >
-
+          <h2>Booking for {dateSelected}</h2>
           <button onClick={this.props.closeModal}>CLOSE</button>
           <TimeSlot startTime={830} stopTime={900}  />
           <TimeSlot startTime={900} stopTime={930}  />
