@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
+import TimeSlot from '../components/TimeSlot'
 
 const customStyles = {
   content : {
@@ -48,20 +49,20 @@ class TimeSlotModal extends React.Component {
 
           <h2 ref={subtitle => this.subtitle = subtitle}>Booking times</h2>
           <button onClick={this.closeModal}>close</button>
-          <div className="slotTime">08:30-09:00</div>
-          <div className="slotTime">09:00-09:30</div>
-          <div className="slotTime">09:30-10:00</div>
-          <div className="slotTime">10:00-10:30</div>
-          <div className="slotTime">10:30-11:00</div>
-          <div className="slotTime">11:00-11:30</div>
-          <div className="slotTime">11:30-12:00</div>
-          <div className="slotTime">12:00-12:30</div>
-          <div className="slotTime">12:30-13:00</div>
-          <div className="slotTime">13:00-13:30</div>
-          <div className="slotTime">13:30-14:00</div>
-          <div className="slotTime">14:00-14:30</div>
-          <div className="slotTime">14:30-15:00</div>
-          <div className="slotTime">15:00-15:30</div>
+          <TimeSlot startTime={830} stopTime={900}  />
+          <TimeSlot startTime={900} stopTime={930}  />
+          <TimeSlot startTime={930} stopTime={1000}  />
+          <TimeSlot startTime={1000} stopTime={1030}  />
+          <TimeSlot startTime={1030} stopTime={1100}  />
+          <TimeSlot startTime={1100} stopTime={1130}  />
+          <TimeSlot startTime={1130} stopTime={1200}  />
+          <TimeSlot startTime={1200} stopTime={1230}  />
+          <TimeSlot startTime={1230} stopTime={1300}  />
+          <TimeSlot startTime={1300} stopTime={1330}  />
+          <TimeSlot startTime={1330} stopTime={1400}  />
+          <TimeSlot startTime={1400} stopTime={1430}  />
+          <TimeSlot startTime={1430} stopTime={1500}  />
+          <TimeSlot startTime={1500} stopTime={1530}  />
         </Modal>
       </div>
     );

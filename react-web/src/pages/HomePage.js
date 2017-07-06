@@ -13,7 +13,6 @@ const HomePage = ({
 
   return (
     <div>
-      <h2>Make a Booking</h2>
         <TimeSlotModal />
         <InfiniteCalendar
           width={400}

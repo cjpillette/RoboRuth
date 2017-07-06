@@ -29,8 +29,9 @@ nav a.active {
 
 .slotTime {
   margin: auto;
-  width: 100px;
+  width: 200px;
   height: 30px;
+  text-align: left;
   border: 0.5px solid black;
   box-sizing: border-box;
 }
