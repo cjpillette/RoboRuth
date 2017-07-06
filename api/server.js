@@ -3,7 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const authMiddleware = require('./middleware/auth')
-const moviesRouter = require('./routes/movies')
+const bookingsRouter = require('./routes/bookings')
 const peopleRouter = require('./routes/people')
 const authRouter = require('./routes/auth')
 
@@ -21,14 +21,14 @@ server.use(cors({
 
 // API Routes
 server.use([
-    moviesRouter,
+    bookingsRouter,
     peopleRouter,
     authRouter
 ])
 
 // Route to quickly set database up
 server.get('/setup', (req, res) => {
-    const forestGump = new Movie({ title: 'Forest Gump' })
+    const forestGump = new Booking({ entryNumber: 'ACLKJUM76' })
     console.log('Save')
     forestGump.save()
         .then(doc => {

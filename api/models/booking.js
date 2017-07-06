@@ -1,4 +1,5 @@
-const mongoose = require('./init')
+const mongoose = require('../db/db')
+
 
 const peopleRoleSchema = [{
     person: {
@@ -12,15 +13,9 @@ const peopleRoleSchema = [{
     }
 }]
 
-const inspectionTypeSchema = [
-  inspection: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Inspection'
-  }
-]
 
 const bookingSchema = mongoose.Schema({
-    inspectionType: inspectionTypeSchema,
+    inspectionType: String,
     clientId: peopleRoleSchema,
     entryNumber: String,
     noteToOfficer: String,
