@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom'
 import './App.css'
 import PrimaryNav from './components/PrimaryNav'
-import HomePage from './pages/HomePage'
 import BookingsPage from './pages/BookingsPage'
 import SignInPage from './pages/SignInPage'
+import MainCalendar from './components/MainCalendar'
 import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
 
@@ -47,7 +47,11 @@ class App extends Component {
           { !!error && <p>{ error.message }</p> }
 
           <Switch>
-            <Route exact path='/' component={ HomePage } />
+            <Route exact path='/' render={
+              () => (
+                <MainCalendar />
+              )
+            } />
             <Route path='/signin' render={
               () => (
                 <SignInPage token={ token } onSignIn={ this.handleSignIn } />

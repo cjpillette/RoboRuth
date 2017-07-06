@@ -3,10 +3,10 @@ import { render } from 'react-dom'
 import moment from 'moment'
 import InfiniteCalendar from 'react-infinite-calendar'
 import 'react-infinite-calendar/styles.css'
-import TimeSlotModal from '../components/TimeSlotModal'
+import TimeSlotModal from './TimeSlotModal'
 
-class HomePage extends React.Component {
-    // state
+class MainCalendar extends React.Component {
+// state
 
 
 //functions
@@ -54,4 +54,4 @@ onStandaloneSelect = (value) => {
 }
 
 
-export default HomePage
+export default MainCalendar
