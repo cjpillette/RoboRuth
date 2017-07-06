@@ -18,37 +18,19 @@ const customStyles = {
 
 
 class TimeSlotModal extends React.Component {
-  state = {
-      modalIsOpen: false
-    }
-
-  openModal = () => {
-    this.setState({modalIsOpen: true});
-  }
-
-  afterOpenModal = () => {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
-  closeModal = () => {
-    this.setState({modalIsOpen: false});
-  }
 
   render() {
     return (
       <div>
-        <button onClick={this.openModal}>Open Modal</button>
         <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
+          isOpen={this.props.modalIsOpen}
+          // onAfterOpen={this.props.afterOpenModal}
+          onRequestClose={this.props.closeModal}
           style={customStyles}
-          contentLabel="Banana"
+          contentLabel="Hours available for booking"
         >
 
-          <h2 ref={subtitle => this.subtitle = subtitle}>Booking times</h2>
-          <button onClick={this.closeModal}>close</button>
+          <button onClick={this.props.closeModal}>CLOSE</button>
           <TimeSlot startTime={830} stopTime={900}  />
           <TimeSlot startTime={900} stopTime={930}  />
           <TimeSlot startTime={930} stopTime={1000}  />
