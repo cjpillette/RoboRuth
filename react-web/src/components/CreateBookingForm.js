@@ -1,5 +1,6 @@
 import React from 'react'
 import Field from './Field'
+import moment from 'moment'
 import readAndClearForm from './readAndClearForm'
 
 function submitCreate(event, onCreate) {
@@ -16,17 +17,22 @@ function submitCreate(event, onCreate) {
     onCreate({startTime, inspectionType, entryNumber, attachment, noteToOfficer})
 }
 
-export default function CreateBookingForm({
-    onCreate
+export default function CreateSmartBookingForm({
+    onCreate,
+    daySelected
 }) {
+  const dateSelected = moment(daySelected).format("LL").toString();
   return (
-    <form onSubmit={ (event) => submitCreate(event, onCreate) }>
-      <Field label='Start Time' name='startTime' />
-      <Field label='Inspection Type' name='inspectionType' />
-      <Field label='Entry Number' name='entryNumber' />
-      <Field label='Attachment' name='attachment' />
-      <Field label='Comments' name='noteToOfficer' />
-      <button type='submit'>Create Booking</button>
-    </form>
+    <div>
+      <h2>Booking for {dateSelected}</h2>
+      <form onSubmit={ (event) => submitCreate(event, onCreate) }>
+        <Field label='Start Time' name='startTime' />
+        <Field label='Inspection Type' name='inspectionType' />
+        <Field label='Entry Number' name='entryNumber' />
+        <Field label='Attachment' name='attachment' />
+        <Field label='Comments' name='noteToOfficer' />
+        <button type='submit'>Create Booking</button>
+      </form>
+    </div>
   )
 }

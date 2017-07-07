@@ -17,7 +17,12 @@ class App extends Component {
   state = {
     error: null,
     token: null,
-    bookings: null // Null means not loaded yet
+    bookings: null, // Null means not loaded yet
+    daySelected: {}
+  }
+
+  handleSelectDay = (daySelected) => {
+    this.setState({daySelected})
   }
 
   handleSignIn = ({ email, password }) => {
@@ -39,7 +44,7 @@ class App extends Component {
   }
 
   render() {
-    const { error, token, bookings } = this.state
+    const { error, token, bookings, daySelected } = this.state
     return (
       <Router>
         <main>
@@ -49,7 +54,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={
               () => (
-                <MainCalendar />
+                <MainCalendar daySelected={daySelected} onSelectDay={ this.handleSelectDay }/>
               )
             } />
             <Route path='/signin' render={
@@ -59,7 +64,7 @@ class App extends Component {
             } />
             <Route path='/bookings' render={
               () => (
-                <BookingsPage bookings={ bookings } onCreateBooking ={this.handleCreateBooking} />
+                <BookingsPage bookings={ bookings } onCreateBooking ={this.handleCreateBooking} daySelected={daySelected}/>
               )
             } />
             <Route render={

@@ -7,6 +7,7 @@ export default function Booking({
   inspectionType,
   entryNumber,
   noteToOfficer,
+  dateSelected,
   startTime,
   attachment,
   showLink = false
@@ -14,6 +15,7 @@ export default function Booking({
   return (
     <article>
       <h2>
+        { dateSelected }
         <small>{ startTime }</small>
         <Link to={ `/bookings/${_id}` }>
           { inspectionType }

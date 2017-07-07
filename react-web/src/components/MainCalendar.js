@@ -8,13 +8,14 @@ import TimeSlotModal from './TimeSlotModal'
 class MainCalendar extends React.Component {
 // state
   state = {
-    daySelected: {},
     modalIsOpen: false,
   }
 
 //functions
 onStandaloneSelect = (daySelected) => {
-  this.setState({daySelected, modalIsOpen: true})
+  // The parent component has responsibility for the selected day
+  this.props.onSelectDay(daySelected)
+  this.setState({modalIsOpen: true})
 }
 
 openModal = () => {
@@ -32,7 +33,7 @@ closeModal = () => {
     return (
       <div>
           <TimeSlotModal
-            daySelected={this.state.daySelected}
+            daySelected={this.props.daySelected}
             modalIsOpen={this.state.modalIsOpen}
             closeModal={this.closeModal}
           />

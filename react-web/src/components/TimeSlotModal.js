@@ -32,20 +32,20 @@ class TimeSlotModal extends React.Component {
         >
           <h2>Booking for {dateSelected}</h2>
           <button onClick={this.props.closeModal}>CLOSE</button>
-          <TimeSlot startTime={830} stopTime={900}  />
-          <TimeSlot startTime={900} stopTime={930}  />
-          <TimeSlot startTime={930} stopTime={1000}  />
-          <TimeSlot startTime={1000} stopTime={1030}  />
-          <TimeSlot startTime={1030} stopTime={1100}  />
-          <TimeSlot startTime={1100} stopTime={1130}  />
-          <TimeSlot startTime={1130} stopTime={1200}  />
-          <TimeSlot startTime={1200} stopTime={1230}  />
-          <TimeSlot startTime={1230} stopTime={1300}  />
-          <TimeSlot startTime={1300} stopTime={1330}  />
-          <TimeSlot startTime={1330} stopTime={1400}  />
-          <TimeSlot startTime={1400} stopTime={1430}  />
-          <TimeSlot startTime={1430} stopTime={1500}  />
-          <TimeSlot startTime={1500} stopTime={1530}  />
+          <TimeSlot startTime={830} stopTime={900} dateSelected={dateSelected}  />
+          <TimeSlot startTime={900} stopTime={930}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={930} stopTime={1000}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1000} stopTime={1030}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1030} stopTime={1100}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1100} stopTime={1130}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1130} stopTime={1200}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1200} stopTime={1230}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1230} stopTime={1300}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1300} stopTime={1330}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1330} stopTime={1400}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1400} stopTime={1430}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1430} stopTime={1500}  dateSelected={dateSelected}/>
+          <TimeSlot startTime={1500} stopTime={1530}  dateSelected={dateSelected}/>
         </Modal>
       </div>
     );
