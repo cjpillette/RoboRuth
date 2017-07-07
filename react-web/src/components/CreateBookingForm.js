@@ -17,14 +17,17 @@ function submitCreate(event, onCreate) {
     onCreate({startTime, inspectionType, entryNumber, attachment, noteToOfficer})
 }
 
-export default function CreateSmartBookingForm({
+export default function CreateBookingForm({
     onCreate,
-    daySelected
+    daySelected,
+    startTimeSelected
 }) {
   const dateSelected = moment(daySelected).format("LL").toString();
+  const timeSelected = startTimeSelected.toString();
   return (
     <div>
       <h2>Booking for {dateSelected}</h2>
+      <h3>at {timeSelected} </h3>
       <form onSubmit={ (event) => submitCreate(event, onCreate) }>
         <Field label='Start Time' name='startTime' />
         <Field label='Inspection Type' name='inspectionType' />

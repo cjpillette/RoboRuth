@@ -8,7 +8,7 @@ import TimeSlotModal from './TimeSlotModal'
 class MainCalendar extends React.Component {
 // state
   state = {
-    modalIsOpen: false,
+    modalIsOpen: false
   }
 
 //functions
@@ -17,6 +17,11 @@ onStandaloneSelect = (daySelected) => {
   this.props.onSelectDay(daySelected)
   this.setState({modalIsOpen: true})
 }
+
+onSelectInspectionStartTime = (startTime) => {
+  this.props.onSelectTimeStart(startTime)
+}
+
 
 openModal = () => {
   this.setState({modalIsOpen: true});
@@ -36,6 +41,8 @@ closeModal = () => {
             daySelected={this.props.daySelected}
             modalIsOpen={this.state.modalIsOpen}
             closeModal={this.closeModal}
+            onSelectTimeStart={ this.props.onTimeSelected}
+            // selectInspectionStartTime={this.onSelectInspectionStartTime}
           />
           <InfiniteCalendar
             width={400}

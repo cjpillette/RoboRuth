@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom'
 export default function TimeSlot({
   startTime,
   stopTime,
-  dateSelected,
-  showLink = false
+  onClick
 }) {
   return (
       <div className="slotTime">
-        <Link to={ `/bookings` }>
+        <Link to={ `/bookings` } onClick={ () => onClick(startTime) }>
           { startTime }
           {'-'}
           { stopTime }
