@@ -19,7 +19,8 @@ class App extends Component {
     token: null,
     bookings: null, // Null means not loaded yet
     daySelected: {},
-    startTimeSelected: {}
+    startTimeSelected: {},
+    selectInspValue: null
   }
 
   handleSelectDay = (daySelected) => {
@@ -28,6 +29,10 @@ class App extends Component {
 
   handleStartTime = (startTimeSelected) => {
     this.setState({startTimeSelected})
+  }
+
+  handleInspectionSelection = (e) => {
+    this.setState({selectInspValue: e.target.value})
   }
 
   handleSignIn = ({ email, password }) => {
@@ -49,7 +54,7 @@ class App extends Component {
   }
 
   render() {
-    const { error, token, bookings, daySelected, startTimeSelected } = this.state
+    const { error, token, bookings, daySelected, startTimeSelected, selectInspValue } = this.state
     return (
       <Router>
         <main>
@@ -78,9 +83,11 @@ class App extends Component {
               () => (
                 <BookingsPage
                   bookings={ bookings }
-                  onCreateBooking ={this.handleCreateBooking}
+                  onCreateBooking={this.handleCreateBooking}
                   daySelected={daySelected}
                   startTimeSelected={startTimeSelected}
+                  onSelectInspection={this.handleInspectionSelection}
+                  selectInspValue={this.state.selectInspValue}
                 />
               )
             } />

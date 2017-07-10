@@ -18,7 +18,7 @@ onStandaloneSelect = (daySelected) => {
   this.setState({modalIsOpen: true})
 }
 
-onSelectInspectionStartTime = (startTime) => {
+onSelectTimeStart = (startTime) => {
   this.props.onSelectTimeStart(startTime)
 }
 
@@ -41,8 +41,7 @@ closeModal = () => {
             daySelected={this.props.daySelected}
             modalIsOpen={this.state.modalIsOpen}
             closeModal={this.closeModal}
-            onSelectTimeStart={ this.props.onTimeSelected}
-            // selectInspectionStartTime={this.onSelectInspectionStartTime}
+            onSelectTimeStart={ this.props.onSelectTimeStart}
           />
           <InfiniteCalendar
             width={400}

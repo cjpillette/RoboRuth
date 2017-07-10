@@ -7,30 +7,37 @@ function submitCreate(event, onCreate) {
     event.preventDefault()
 
     const form = event.target
-    const startTime = form.elements['startTime'].value
-    const inspectionType = form.elements['inspectionType'].value
     const entryNumber = form.elements['entryNumber'].value
     const attachment = form.elements['attachment'].value
     const noteToOfficer = form.elements['noteToOfficer'].value
     // const bookingValues = readAndClearForm(form)
     // onCreate(bookingValues)
-    onCreate({startTime, inspectionType, entryNumber, attachment, noteToOfficer})
+    onCreate({entryNumber, attachment, noteToOfficer})
 }
 
 export default function CreateBookingForm({
     onCreate,
     daySelected,
-    startTimeSelected
+    startTimeSelected,
+    selectInspValue,
+    onSelectInspection
 }) {
   const dateSelected = moment(daySelected).format("LL").toString();
   const timeSelected = startTimeSelected.toString();
+
   return (
     <div>
       <h2>Booking for {dateSelected}</h2>
       <h3>at {timeSelected} </h3>
       <form onSubmit={ (event) => submitCreate(event, onCreate) }>
-        <Field label='Start Time' name='startTime' />
-        <Field label='Inspection Type' name='inspectionType' />
+        <select
+        value={selectInspValue}
+        onChange={onSelectInspection}
+        >
+          <option value="rtg">RTG</option>
+          <option value="unpack">Unpack/Inspect</option>
+          <option value="exportCert">Export Certification</option>
+        </select>
         <Field label='Entry Number' name='entryNumber' />
         <Field label='Attachment' name='attachment' />
         <Field label='Comments' name='noteToOfficer' />

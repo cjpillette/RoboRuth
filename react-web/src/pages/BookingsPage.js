@@ -8,10 +8,18 @@ const BookingsPage = ({
     bookings,
     onCreateBooking,
     daySelected,
-    startTimeSelected
+    startTimeSelected,
+    onSelectInspection,
+    selectInspValue
 }) => (
     <div>
-        <CreateBookingForm onCreate={ onCreateBooking } daySelected={daySelected} startTimeSelected={startTimeSelected}/>
+        <CreateBookingForm
+        onCreate={ onCreateBooking }
+        daySelected={daySelected}
+        startTimeSelected={startTimeSelected}
+        onSelectInspection={ onSelectInspection }
+        selectInspValue={ selectInspValue }
+        />
     {
         !!bookings ? (
             <Switch>
