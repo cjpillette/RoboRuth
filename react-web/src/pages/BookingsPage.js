@@ -10,7 +10,8 @@ const BookingsPage = ({
     daySelected,
     startTimeSelected,
     onSelectInspection,
-    selectInspValue
+    selectInspValue,
+    onDeleteBooking
 }) => (
     <div>
         <CreateBookingForm
@@ -43,7 +44,7 @@ const BookingsPage = ({
                 } />
                 <Route path='/bookings' render={
                     () => (
-                        <BookingsList items={ bookings } />
+                        <BookingsList items={ bookings } onDeleteBooking = { onDeleteBooking }/>
                     )
                 } />
             </Switch>

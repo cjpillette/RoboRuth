@@ -11,3 +11,7 @@ export function create({
         inspectionType, entryNumber, noteToOfficer, dateSelected, startTime, attachment
     }).then(res => res.data)
 }
+
+export function destroy(id) {
+    return api.delete(`/bookings/${id}`).then(res => ({}))
+}
