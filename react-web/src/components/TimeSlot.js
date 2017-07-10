@@ -1,14 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function TimeSlot({
   startTime,
-  stopTime
+  stopTime,
+  onClick
 }) {
   return (
       <div className="slotTime">
-        {startTime}
-        {'-'}
-        {stopTime}
+        <Link to={ `/bookings` } onClick={ () => onClick(startTime) }>
+          { startTime }
+          {'-'}
+          { stopTime }
+        </Link>
       </div>
   )
 }

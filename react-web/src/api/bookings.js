@@ -5,9 +5,9 @@ export function list() {
 }
 
 export function create({
-  inspectionType, entryNumber, noteToOfficer, startTime, attachment
+  inspectionType, entryNumber, noteToOfficer, dateSelected, startTime, attachment
  }) {
     return api.post('/bookings', {
-        inspectionType, entryNumber, noteToOfficer, startTime, attachment
+        inspectionType, entryNumber, noteToOfficer, dateSelected, startTime, attachment
     }).then(res => res.data)
 }

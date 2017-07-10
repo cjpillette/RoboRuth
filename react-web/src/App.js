@@ -17,7 +17,22 @@ class App extends Component {
   state = {
     error: null,
     token: null,
-    bookings: null // Null means not loaded yet
+    bookings: null, // Null means not loaded yet
+    daySelected: {},
+    startTimeSelected: {},
+    selectInspValue: null
+  }
+
+  handleSelectDay = (daySelected) => {
+    this.setState({daySelected})
+  }
+
+  handleStartTime = (startTimeSelected) => {
+    this.setState({startTimeSelected})
+  }
+
+  handleInspectionSelection = (e) => {
+    this.setState({selectInspValue: e.target.value})
   }
 
   handleSignIn = ({ email, password }) => {
@@ -39,7 +54,7 @@ class App extends Component {
   }
 
   render() {
-    const { error, token, bookings } = this.state
+    const { error, token, bookings, daySelected, startTimeSelected, selectInspValue } = this.state
     return (
       <Router>
         <main>
@@ -49,17 +64,31 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={
               () => (
-                <MainCalendar />
+                <MainCalendar
+                  daySelected={daySelected}
+                  onSelectDay={ this.handleSelectDay }
+                  onSelectTimeStart={this.handleStartTime}
+                />
               )
             } />
             <Route path='/signin' render={
               () => (
-                <SignInPage token={ token } onSignIn={ this.handleSignIn } />
+                <SignInPage
+                  token={ token }
+                  onSignIn={ this.handleSignIn }
+                />
               )
             } />
             <Route path='/bookings' render={
               () => (
-                <BookingsPage bookings={ bookings } onCreateBooking ={this.handleCreateBooking} />
+                <BookingsPage
+                  bookings={ bookings }
+                  onCreateBooking={this.handleCreateBooking}
+                  daySelected={daySelected}
+                  startTimeSelected={startTimeSelected}
+                  onSelectInspection={this.handleInspectionSelection}
+                  selectInspValue={this.state.selectInspValue}
+                />
               )
             } />
             <Route render={

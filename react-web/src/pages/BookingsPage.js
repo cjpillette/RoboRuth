@@ -6,10 +6,20 @@ import Booking from '../components/Booking'
 
 const BookingsPage = ({
     bookings,
-    onCreateBooking
+    onCreateBooking,
+    daySelected,
+    startTimeSelected,
+    onSelectInspection,
+    selectInspValue
 }) => (
     <div>
-        <CreateBookingForm onCreate={ onCreateBooking } />
+        <CreateBookingForm
+        onCreate={ onCreateBooking }
+        daySelected={daySelected}
+        startTimeSelected={startTimeSelected}
+        onSelectInspection={ onSelectInspection }
+        selectInspValue={ selectInspValue }
+        />
     {
         !!bookings ? (
             <Switch>
