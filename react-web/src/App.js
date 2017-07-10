@@ -45,6 +45,15 @@ class App extends Component {
       })
   }
 
+  handleDeleteBooking = (id) => {
+    const bookings = this.state.bookings.filter((booking) => {
+      return booking._id !== id;
+    });
+    this.setState({ bookings: bookings });
+
+    bookingsAPI.destroy(id)
+  }
+
   handleCreateBooking = (booking) => {
     this.setState(({ bookings }) => ({
       bookings: [ booking ].concat(bookings)
@@ -88,6 +97,7 @@ class App extends Component {
                   startTimeSelected={startTimeSelected}
                   onSelectInspection={this.handleInspectionSelection}
                   selectInspValue={this.state.selectInspValue}
+                  onDeleteBooking={this.handleDeleteBooking}
                 />
               )
             } />
