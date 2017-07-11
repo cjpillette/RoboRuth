@@ -13,7 +13,6 @@ function submitCreate(event, onCreate, dateSelected, startTimeSelected) {
     const e = document.getElementById('inspectionType')
     const inspectionType = e.options[e.selectedIndex].text
     // const bookingValues = readAndClearForm(form)
-    // onCreate(bookingValues)
     onCreate({entryNumber, attachment, noteToOfficer, inspectionType, dateSelected, startTimeSelected})
 }
 

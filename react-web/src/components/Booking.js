@@ -17,7 +17,7 @@ export default function Booking({
   return (
     <article>
       <p>On { moment(dateSelected).format('ddd, DD-MM-YYYY') }</p>
-      <p>at { startTimeSelected }</p>
+      <p>at { moment(startTimeSelected).format('HH:mm') }</p>
       <p>{ inspectionType }</p>
       <Link to={ `/bookings/${_id}` }>
         { entryNumber }

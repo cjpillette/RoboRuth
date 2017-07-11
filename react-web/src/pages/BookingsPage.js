@@ -14,7 +14,7 @@ const BookingsPage = ({
     onDeleteBooking
 }) => (
     <div>
-        { !!daySelected && 
+        { !!startTimeSelected && !!daySelected &&
           <CreateBookingForm
           onCreate={ onCreateBooking }
           daySelected={daySelected}
