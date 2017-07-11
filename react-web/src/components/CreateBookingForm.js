@@ -41,7 +41,7 @@ export default function CreateBookingForm({
         <Field label='Entry Number' name='entryNumber' />
         <Field label='Attachment' name='attachment' />
         <Field label='Comments' name='noteToOfficer' />
-        <button type='submit'>Create Booking</button>
+        <button type='submit' className='btn'>Create Booking</button>
       </form>
     </div>
   )

@@ -30,23 +30,25 @@ class TimeSlotModal extends React.Component {
           onRequestClose={this.props.closeModal}
           style={customStyles}
           contentLabel="Hours available for booking"
+
         >
+          <button onClick={this.props.closeModal} className="btn btn-red">X</button>
           <h2>Booking for {dateSelected}</h2>
-          <button onClick={this.props.closeModal}>CLOSE</button>
-          <TimeSlot startTime={830} stopTime={900}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={900} stopTime={930}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={930} stopTime={1000}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1000} stopTime={1030}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1030} stopTime={1100}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1100} stopTime={1130}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1130} stopTime={1200}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1200} stopTime={1230}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1230} stopTime={1300}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1300} stopTime={1330}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1330} stopTime={1400}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1400} stopTime={1430}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1430} stopTime={1500}  onClick={ onSelectTimeStart }/>
-          <TimeSlot startTime={1500} stopTime={1530}  onClick={ onSelectTimeStart }/>
+          <small>select a time</small>  
+          <TimeSlot startTime={830} stopTime={900}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={900} stopTime={930}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={930} stopTime={1000}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1000} stopTime={1030}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1030} stopTime={1100}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1100} stopTime={1130}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1130} stopTime={1200}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1200} stopTime={1230}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1230} stopTime={1300}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1300} stopTime={1330}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1330} stopTime={1400}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1400} stopTime={1430}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1430} stopTime={1500}  onClick={ onSelectTimeStart } />
+          <TimeSlot startTime={1500} stopTime={1530}  onClick={ onSelectTimeStart } />
         </Modal>
       </div>
     );
