@@ -34,7 +34,7 @@ class TimeSlotModal extends React.Component {
         >
           <button onClick={this.props.closeModal} className="btn btn-red">X</button>
           <h2>Booking for {dateSelected}</h2>
-          <small>select a time</small>  
+          <small>select a time</small>
           <TimeSlot startTime={830} stopTime={900}  onClick={ onSelectTimeStart } />
           <TimeSlot startTime={900} stopTime={930}  onClick={ onSelectTimeStart } />
           <TimeSlot startTime={930} stopTime={1000}  onClick={ onSelectTimeStart } />

@@ -46,7 +46,8 @@ const BookingsPage = ({
                     () => (
                         <BookingsList items={ bookings } onDeleteBooking = { onDeleteBooking }/>
                     )
-                } />
+                  }
+                />
             </Switch>
         ) : (
             'Loading bookings…'

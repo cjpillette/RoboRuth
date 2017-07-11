@@ -3,16 +3,18 @@ import Field from './Field'
 import moment from 'moment'
 import readAndClearForm from './readAndClearForm'
 
-function submitCreate(event, onCreate) {
+function submitCreate(event, onCreate, dateSelected, timeSelected) {
     event.preventDefault()
 
     const form = event.target
     const entryNumber = form.elements['entryNumber'].value
     const attachment = form.elements['attachment'].value
     const noteToOfficer = form.elements['noteToOfficer'].value
+    const inspectionType = 'RTG'
+
     // const bookingValues = readAndClearForm(form)
     // onCreate(bookingValues)
-    onCreate({entryNumber, attachment, noteToOfficer})
+    onCreate({entryNumber, attachment, noteToOfficer, inspectionType, dateSelected, timeSelected})
 }
 
 export default function CreateBookingForm({
@@ -29,7 +31,7 @@ export default function CreateBookingForm({
     <div>
       <h2>Booking for {dateSelected}</h2>
       <h3>at {timeSelected} </h3>
-      <form onSubmit={ (event) => submitCreate(event, onCreate) }>
+      <form onSubmit={ (event) => submitCreate(event, onCreate, dateSelected, timeSelected) }>
         <select
         value={selectInspValue}
         onChange={onSelectInspection}
@@ -40,8 +42,8 @@ export default function CreateBookingForm({
         </select>
         <Field label='Entry Number' name='entryNumber' />
         <Field label='Attachment' name='attachment' />
-        <Field label='Comments' name='noteToOfficer' />
-        <button type='submit' className='btn'>Create Booking</button>
+        <Field label='Comments' name='noteToOfficer' type='textarea' />
+        <button type='submit' className='btn btn-submit'>Create Booking</button>
       </form>
     </div>
   )

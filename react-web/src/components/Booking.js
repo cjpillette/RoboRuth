@@ -17,8 +17,8 @@ export default function Booking({
       <h2>
         { dateSelected }
         <small>{ startTime }</small>
+        { inspectionType }
         <Link to={ `/bookings/${_id}` }>
-          { inspectionType }
           { ' '}
           { entryNumber }
         </Link>
