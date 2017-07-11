@@ -23,6 +23,7 @@ class TimeSlotModal extends React.Component {
   render() {
     const { onSelectTimeStart } = this.props
     const dateSelected = moment(this.props.daySelected).format("LL").toString();
+
     return (
       <div>
         <Modal

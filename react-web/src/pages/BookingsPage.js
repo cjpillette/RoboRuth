@@ -14,13 +14,15 @@ const BookingsPage = ({
     onDeleteBooking
 }) => (
     <div>
-        <CreateBookingForm
-        onCreate={ onCreateBooking }
-        daySelected={daySelected}
-        startTimeSelected={startTimeSelected}
-        onSelectInspection={ onSelectInspection }
-        selectInspValue={ selectInspValue }
-        />
+        { !!daySelected && !!startTimeSelected &&
+          <CreateBookingForm
+          onCreate={ onCreateBooking }
+          daySelected={daySelected}
+          startTimeSelected={startTimeSelected}
+          onSelectInspection={ onSelectInspection }
+          selectInspValue={ selectInspValue }
+          />
+        }
     {
         !!bookings ? (
             <Switch>

@@ -18,8 +18,8 @@ class App extends Component {
     error: null,
     token: null,
     bookings: null, // Null means not loaded yet
-    daySelected: {},
-    startTimeSelected: {},
+    daySelected: null,
+    startTimeSelected: null,
     selectInspValue: null
   }
 
