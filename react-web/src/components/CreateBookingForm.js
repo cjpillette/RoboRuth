@@ -11,7 +11,7 @@ function submitCreate(event, onCreate, dateSelected, timeSelected) {
     const attachment = form.elements['attachment'].value
     const noteToOfficer = form.elements['noteToOfficer'].value
     const e = document.getElementById('inspectionType')
-    const inspectionType = e.options[e.selectedIndex].value
+    const inspectionType = e.options[e.selectedIndex].text
     // const bookingValues = readAndClearForm(form)
     // onCreate(bookingValues)
     onCreate({entryNumber, attachment, noteToOfficer, inspectionType, dateSelected, timeSelected})

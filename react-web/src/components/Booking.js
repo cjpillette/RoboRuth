@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 export default function Booking({
   _id,
@@ -8,21 +9,18 @@ export default function Booking({
   entryNumber,
   noteToOfficer,
   dateSelected,
-  startTime,
+  timeSelected,
   attachment,
   showLink = false
 }) {
   return (
     <article>
-      <h2>
-        { dateSelected }
-        <small>{ startTime }</small>
-        { inspectionType }
-        <Link to={ `/bookings/${_id}` }>
-          { ' '}
-          { entryNumber }
-        </Link>
-      </h2>
+      <p>{ moment(dateSelected).format('ddd, DD-MM-YYYY') }</p>
+      <p>{ timeSelected }</p>
+      <p>{ inspectionType }</p>
+      <Link to={ `/bookings/${_id}` }>
+        { entryNumber }
+      </Link>
     </article>
   )
 }
