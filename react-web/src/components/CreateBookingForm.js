@@ -10,8 +10,8 @@ function submitCreate(event, onCreate, dateSelected, timeSelected) {
     const entryNumber = form.elements['entryNumber'].value
     const attachment = form.elements['attachment'].value
     const noteToOfficer = form.elements['noteToOfficer'].value
-    const inspectionType = 'RTG'
-
+    const e = document.getElementById('inspectionType')
+    const inspectionType = e.options[e.selectedIndex].value
     // const bookingValues = readAndClearForm(form)
     // onCreate(bookingValues)
     onCreate({entryNumber, attachment, noteToOfficer, inspectionType, dateSelected, timeSelected})
@@ -35,6 +35,7 @@ export default function CreateBookingForm({
         <select
         value={selectInspValue}
         onChange={onSelectInspection}
+        id='inspectionType'
         >
           <option value="rtg">RTG</option>
           <option value="unpack">Unpack/Inspect</option>
