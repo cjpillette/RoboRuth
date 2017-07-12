@@ -12,9 +12,9 @@ class MainCalendar extends React.Component {
   }
 
 //functions
-onStandaloneSelect = (daySelected) => {
+onStandaloneSelect = (dateSelected) => {
   // The parent component has responsibility for the selected day
-  this.props.onSelectDay(daySelected)
+  this.props.onSelectDay(dateSelected)
   this.setState({modalIsOpen: true})
 }
 
@@ -35,14 +35,15 @@ closeModal = () => {
   render() {
     const today = new Date()
     const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7)
+
     return (
       <div>
-          { !!this.props.daySelected &&
+          { !!this.props.dateSelected &&
             <TimeSlotModal
-              daySelected={this.props.daySelected}
+              dateSelected={this.props.dateSelected}
               modalIsOpen={this.state.modalIsOpen}
               closeModal={this.closeModal}
-              onSelectTimeStart={ this.props.onSelectTimeStart}
+              onSelectTimeStart={this.onSelectTimeStart}
             />
           }
           <InfiniteCalendar

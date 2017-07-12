@@ -9,6 +9,7 @@ import PrimaryNav from './components/PrimaryNav'
 import BookingsPage from './pages/BookingsPage'
 import SignInPage from './pages/SignInPage'
 import MainCalendar from './components/MainCalendar'
+import moment from 'moment'
 import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
 
@@ -18,17 +19,23 @@ class App extends Component {
     error: null,
     token: null,
     bookings: null, // Null means not loaded yet
-    daySelected: null,
-    startTimeSelected: null,
+    dateSelected: null,
     selectInspValue: null
   }
 
-  handleSelectDay = (daySelected) => {
-    this.setState({daySelected})
+  handleSelectDay = (dateSelected) => {
+    this.setState({dateSelected})
   }
 
-  handleStartTime = (startTimeSelected) => {
-    this.setState({startTimeSelected})
+  handleStartTime = (time) => {
+    this.setState((prevState) => {
+      let oldDate = prevState.dateSelected
+      let newTime = moment(time).format("HH:mm").toString()
+      let newHour = newTime.substring(0,2)
+      let newMinute = newTime.substring(3)
+      let newDate = moment(oldDate).set({'hour': newHour, 'minute': newMinute})
+      return { dateSelected: newDate }
+    })
   }
 
   handleInspectionSelection = (e) => {
@@ -63,7 +70,7 @@ class App extends Component {
   }
 
   render() {
-    const { error, token, bookings, daySelected, startTimeSelected, selectInspValue } = this.state
+    const { error, token, bookings, dateSelected, selectInspValue } = this.state
     return (
       <Router>
         <main>
@@ -74,7 +81,7 @@ class App extends Component {
             <Route exact path='/' render={
               () => (
                 <MainCalendar
-                  daySelected={daySelected}
+                  dateSelected={dateSelected}
                   onSelectDay={ this.handleSelectDay }
                   onSelectTimeStart={this.handleStartTime}
                 />
@@ -93,8 +100,7 @@ class App extends Component {
                 <BookingsPage
                   bookings={ bookings }
                   onCreateBooking={this.handleCreateBooking}
-                  daySelected={daySelected}
-                  startTimeSelected={startTimeSelected}
+                  dateSelected={dateSelected}
                   onSelectInspection={this.handleInspectionSelection}
                   selectInspValue={this.state.selectInspValue}
                   onDeleteBooking={this.handleDeleteBooking}

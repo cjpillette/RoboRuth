@@ -8,16 +8,14 @@ export default function Booking({
   inspectionType,
   entryNumber,
   noteToOfficer,
-  dateSelected,
-  startTimeSelected,
+  dayTimeSelected,
   attachment,
   showLink = false
 }) {
 
   return (
     <article>
-      <p>On { moment(dateSelected).format('ddd, DD-MM-YYYY') }</p>
-      <p>at { moment(startTimeSelected).format('HH:mm') }</p>
+      <p>On { moment(dayTimeSelected).format('LLLL') }</p>
       <p>{ inspectionType }</p>
       <Link to={ `/bookings/${_id}` }>
         { entryNumber }
