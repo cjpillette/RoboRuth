@@ -16,7 +16,7 @@ const BookingsPage = ({
         { !!dateSelected &&
           <CreateBookingForm
           onCreate={ onCreateBooking }
-          dateSelected={dateSelected}
+          dayTimeSelected={ dateSelected }
           onSelectInspection={ onSelectInspection }
           selectInspValue={ selectInspValue }
           />

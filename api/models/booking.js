@@ -19,7 +19,7 @@ const bookingSchema = mongoose.Schema({
     clientId: peopleRoleSchema,
     entryNumber: String,
     noteToOfficer: String,
-    dayTimeSelected: Date,
+    dateSelected: Date,
     attachment: String
 })
 
