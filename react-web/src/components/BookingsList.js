@@ -9,9 +9,8 @@ export default function BookingsList({
     <div>
     {
       items.map(item => (
-        <div className="bookingSummary">
+        <div key={ item._id } className="bookingSummary">
           <Booking
-            // key={ item._id }
             { ...item }
             showLink
           />
