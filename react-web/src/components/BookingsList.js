@@ -9,13 +9,12 @@ export default function BookingsList({
     <div>
     {
       items.map(item => (
-        <div>
+        <div key={ item._id } className="bookingSummary">
           <Booking
-            // key={ item._id }
             { ...item }
             showLink
           />
-          <button onClick={() => onDeleteBooking(item._id)}>Delete</button>
+          <button onClick={() => onDeleteBooking(item._id)} className="btn btn-red-long">Delete</button>
         </div>
       ))
     }

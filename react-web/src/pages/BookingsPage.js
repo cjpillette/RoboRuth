@@ -7,20 +7,20 @@ import Booking from '../components/Booking'
 const BookingsPage = ({
     bookings,
     onCreateBooking,
-    daySelected,
-    startTimeSelected,
+    dateSelected,
     onSelectInspection,
     selectInspValue,
     onDeleteBooking
 }) => (
     <div>
-        <CreateBookingForm
-        onCreate={ onCreateBooking }
-        daySelected={daySelected}
-        startTimeSelected={startTimeSelected}
-        onSelectInspection={ onSelectInspection }
-        selectInspValue={ selectInspValue }
-        />
+        { !!dateSelected &&
+          <CreateBookingForm
+          onCreate={ onCreateBooking }
+          dayTimeSelected={ dateSelected }
+          onSelectInspection={ onSelectInspection }
+          selectInspValue={ selectInspValue }
+          />
+        }
     {
         !!bookings ? (
             <Switch>
@@ -46,7 +46,8 @@ const BookingsPage = ({
                     () => (
                         <BookingsList items={ bookings } onDeleteBooking = { onDeleteBooking }/>
                     )
-                } />
+                  }
+                />
             </Switch>
         ) : (
             'Loading bookings…'
