@@ -1,26 +1,25 @@
 const express = require('express')
-const Person = require('../models/person')
-const authMiddleware = require('../middleware/auth')
+const Aqp = require('../models/aqp')
 
 const router = express.Router()
 
 router
-.route('/people')
-// User must be signed in to list people
-.get(authMiddleware.authenticateJWT, (req, res) => {
-    Person.find()
-        .then(people => {
-            res.json(people)
+.route('/aqps')
+.get((req, res) => {
+    Aqp.find()
+        .then(aqps => {
+            res.json(aqps)
         })
         .then(error => {
             res.json({ error })
         })
 })
 .post((req, res) => {
-    const newPerson = req.body
-    Person.create(newPerson)
-        .then(person => {
-            res.json(person)
+    const newAqp = req.body
+    console.log('newAqp', newAqp)
+    Aqp.create(newAqp)
+        .then(aqp => {
+            res.json(aqp)
         })
         .then(error => {
             res.json({ error })
@@ -29,25 +28,25 @@ router
 
 router
 .param('id', (req, res, next, id) => {
-    req.itemQuery = Person.findById(id)
+    req.itemQuery = Aqp.findById(id)
     next()
 })
 
-router.route('/people/:id')
+router.route('/aqps/:id')
 .get((req, res) => {
     req.itemQuery
-        .then(person => {
-            res.json(person)
+        .then(aqp => {
+            res.json(aqp)
         })
         .catch(error => {
             res.status(404).json({ error })
         })
 })
 .put((req, res) => {
-    const newPerson = req.body
-    req.itemQuery.update(newPerson)
+    const newAqp = req.body
+    req.itemQuery.update(newAqp)
         .then(() => {
-            res.json(newPerson)
+            res.json(newAqp)
         })
         .catch(error => {
             res.status(404).json({ error })

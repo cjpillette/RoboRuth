@@ -7,11 +7,14 @@ import {
 import './App.css'
 import PrimaryNav from './components/PrimaryNav'
 import BookingsPage from './pages/BookingsPage'
+import AQPsPage from './pages/AQPsPage'
 import SignInPage from './pages/SignInPage'
+import SignUpPage from './pages/SignUpPage'
 import MainCalendar from './components/MainCalendar'
 import moment from 'moment'
 import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
+import * as aqpsAPI from './api/aqps'
 
 class App extends Component {
   // Initial state
@@ -20,7 +23,8 @@ class App extends Component {
     token: null,
     bookings: null, // Null means not loaded yet
     dateSelected: null,
-    selectInspValue: null
+    selectInspValue: null,
+    aqps: null
   }
 
   handleSelectDay = (dateSelected) => {
@@ -52,13 +56,16 @@ class App extends Component {
       })
   }
 
-  handleDeleteBooking = (id) => {
-    const bookings = this.state.bookings.filter((booking) => {
-      return booking._id !== id;
-    });
-    this.setState({ bookings: bookings });
-
-    bookingsAPI.destroy(id)
+  handleSignUp = ({ aqpNumber, businessName, email, password, firstName, lastName, phoneNumber}) => {
+    authAPI.register({
+      aqpNumber, businessName, email, password, firstName, lastName, phoneNumber
+    })
+      .then(json => {
+        this.setState({ token: json.token })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
   }
 
   handleCreateBooking = (booking) => {
@@ -69,8 +76,35 @@ class App extends Component {
     bookingsAPI.create(booking)
   }
 
+  handleDeleteBooking = (id) => {
+    const bookings = this.state.bookings.filter((booking) => {
+      return booking._id !== id;
+    });
+    this.setState({ bookings: bookings });
+
+    bookingsAPI.destroy(id)
+  }
+
+  handleCreateAQP = (aqp) => {
+    this.setState(({ aqps }) => ({
+      aqps: [ aqp ].concat(aqps || [])
+    }))
+
+    aqpsAPI.create(aqp)
+  }
+
+  handleDeleteAQP = (id) => {
+    const aqps = this.state.aqps.filter((aqp) => {
+      return aqp._id !== id;
+    });
+    this.setState({ aqps: aqps });
+
+    aqpsAPI.destroy(id)
+  }
+
+
   render() {
-    const { error, token, bookings, dateSelected, selectInspValue } = this.state
+    const { error, token, bookings, dateSelected, selectInspValue, aqps } = this.state
     return (
       <Router>
         <main>
@@ -95,6 +129,14 @@ class App extends Component {
                 />
               )
             } />
+            <Route path='/register' render={
+              () => (
+                <SignUpPage
+                  token={ token }
+                  onSignUp={ this.handleSignUp }
+                />
+              )
+            } />
             <Route path='/bookings' render={
               () => (
                 <BookingsPage
@@ -102,8 +144,17 @@ class App extends Component {
                   onCreateBooking={this.handleCreateBooking}
                   dateSelected={dateSelected}
                   onSelectInspection={this.handleInspectionSelection}
-                  selectInspValue={this.state.selectInspValue}
+                  selectInspValue={selectInspValue}
                   onDeleteBooking={this.handleDeleteBooking}
+                />
+              )
+            } />
+            <Route path='/aqps' render={
+              () => (
+                <AQPsPage
+                  aqps={ aqps }
+                  onCreateAQP={this.handleCreateAQP}
+                  onDeleteAQP={this.handleDeleteAQP}
                 />
               )
             } />

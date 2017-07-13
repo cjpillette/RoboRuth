@@ -27,16 +27,12 @@ const BookingsPage = ({
                 <Route path='/bookings/:id' render={
                     ({ match }) => {
                         const id = match.params.id
-                        // Pull the specific movie out from the array
                         const booking = bookings.find((booking) => booking._id === id)
-                        // Render error message if not movie found
                         if (!booking) {
                             return (
                                 <p>Booking with id "{ id }" not found</p>
                             )
                         }
-
-                        // Render the individual movie
                         return (
                             <Booking { ...booking } />
                         )
