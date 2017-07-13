@@ -1,4 +1,5 @@
 import React from 'react'
+import Field from './Field'
 
 const formStyle = {
   display: 'flex',
@@ -22,19 +23,16 @@ export default function SignInForm({
   onSignIn
 }) {
   return (
-    <form
-      onSubmit={ (event) => submitSignIn(event, onSignIn) }
-      style={ formStyle }
-    >
-      <label>
-        <span>Email </span>
-        <input name='email' />
-      </label>
-      <label>
-        <span>Password </span>
-        <input type='password' name='password' />
-      </label>
-      <button>Sign In</button>
-    </form>
+    <div>
+      <form
+        onSubmit={ (event) => submitSignIn(event, onSignIn) }
+        style={ formStyle }
+      >
+        <Field label='Email' name='email' type='text' />
+        <Field label='Password' name='password' type='password' />
+        <button className="btn btn-submit">Sign In</button>
+      </form>
+      <p className="forgot-password">I forgot my password</p>
+    </div>
   )
 }

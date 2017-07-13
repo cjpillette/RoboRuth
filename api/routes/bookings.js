@@ -1,5 +1,5 @@
 const express = require('express')
-const Company = require('../models/company')
+const Aqp = require('../models/aqp')
 const Booking = require('../models/booking')
 
 const router = express.Router()
@@ -9,7 +9,6 @@ router
 .get((req, res) => {
     Booking.find()
         .populate('inspectionType.inspection')
-        .populate('clientId.company')
         .then(bookings => {
             res.json(bookings)
         })
@@ -38,7 +37,6 @@ router.route('/bookings/:id')
 .get((req, res) => {
     req.itemQuery
     .populate('inspectionType.inspection')
-    .populate('clientId.company')
         .then(booking => {
             res.json(booking)
         })

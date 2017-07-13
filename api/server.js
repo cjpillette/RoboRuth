@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const authMiddleware = require('./middleware/auth')
 const bookingsRouter = require('./routes/bookings')
-const peopleRouter = require('./routes/people')
+const aqpsRouter = require('./routes/aqps')
 const authRouter = require('./routes/auth')
 
 // Create server
@@ -22,7 +22,7 @@ server.use(cors({
 // API Routes
 server.use([
     bookingsRouter,
-    peopleRouter,
+    aqpsRouter,
     authRouter
 ])
 

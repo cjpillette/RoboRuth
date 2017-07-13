@@ -1,26 +1,20 @@
 const mongoose = require('../db/db')
 
 
-const peopleRoleSchema = [{
-    person: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Person'
-    },
-    role: String,
-    company: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Company'
-    }
-}]
-
-
 const bookingSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    aqp: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Aqp'
+    },
     inspectionType: String,
-    clientId: peopleRoleSchema,
     entryNumber: String,
     noteToOfficer: String,
     dateSelected: Date,
-    attachment: String
+    attachment: [ {type: String }]
 })
 
 const Booking = mongoose.model('Booking', bookingSchema)
