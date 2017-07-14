@@ -24,6 +24,7 @@ class App extends Component {
     bookings: null, // Null means not loaded yet
     dateSelected: null,
     selectInspValue: null,
+    selectAqpNumber: null,
     aqps: null
   }
 
@@ -44,6 +45,10 @@ class App extends Component {
 
   handleInspectionSelection = (e) => {
     this.setState({selectInspValue: e.target.value})
+  }
+
+  handleAqpSelection = (e) => {
+    this.setState({selectAqpNumber: e.target.value})
   }
 
   handleSignIn = ({ email, password }) => {
@@ -129,7 +134,7 @@ class App extends Component {
 
 
   render() {
-    const { error, token, bookings, dateSelected, selectInspValue, aqps } = this.state
+    const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber } = this.state
     return (
       <Router>
         <main>
@@ -159,6 +164,8 @@ class App extends Component {
                 <SignUpPage
                   token={ token }
                   onSignUp={ this.handleSignUp }
+                  aqps = { aqps }
+                  onSelectAqpNumber={this.handleAqpSelection}
                 />
               )
             } />
