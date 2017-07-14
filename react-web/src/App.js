@@ -106,7 +106,13 @@ class App extends Component {
     // Asychronous
     bookingsAPI.list()
       .then(bookings => {
-        this.setState({ bookings })
+        const sorted_bookings = bookings.sort((a, b) => {
+            a = new Date(a.dateSelected);
+            b = new Date(b.dateSelected);
+            return a<b ? -1 : a>b ? 1 : 0;
+          }
+        )
+        this.setState({ bookings: sorted_bookings })
       })
       .catch(error => {
         this.setState({ error })
