@@ -1,5 +1,6 @@
 import React from 'react'
 import Field from './Field'
+import readAndClearForm from './readAndClearForm'
 
 const formStyle = {
   display: 'flex',
@@ -13,12 +14,16 @@ function submitSignUp(event, onSignUp) {
   // Get <form>
   const form = event.target
   // Get values from the field
-  const aqpNumber = form.elements['aqpNumber'].value
   const email = form.elements['email'].value
   const password = form.elements['password'].value
   const firstName = form.elements['firstName'].value
   const lastName = form.elements['lastName'].value
   const phoneNumber = form.elements['phoneNumber'].value
+
+  const e = document.getElementById('aqpList')
+  const aqpNumber = e.options[e.selectedIndex].value
+
+  const aqpValues = readAndClearForm(form)
   // Call the onSignIn function with our values
   onSignUp({ aqpNumber, email, password, firstName, lastName, phoneNumber })
 }

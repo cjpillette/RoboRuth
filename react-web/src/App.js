@@ -8,6 +8,7 @@ import './App.css'
 import PrimaryNav from './components/PrimaryNav'
 import BookingsPage from './pages/BookingsPage'
 import AQPsPage from './pages/AQPsPage'
+import UsersPage from './pages/UsersPage'
 import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
 import MainCalendar from './components/MainCalendar'
@@ -15,6 +16,7 @@ import moment from 'moment'
 import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
 import * as aqpsAPI from './api/aqps'
+import * as usersAPI from './api/users'
 
 class App extends Component {
   // Initial state
@@ -25,7 +27,8 @@ class App extends Component {
     dateSelected: null,
     selectInspValue: null,
     selectAqpNumber: null,
-    aqps: null
+    aqps: null,
+    users: null
   }
 
   handleSelectDay = (dateSelected) => {
@@ -107,6 +110,15 @@ class App extends Component {
     aqpsAPI.destroy(id)
   }
 
+  handleArchiveUser = (id) => {
+    const users = this.state.bookings.filter((user) => {
+      return user._id !== id;
+    });
+    this.setState({ users: users });
+
+    usersAPI.archive(id)
+  }
+
   componentDidMount() {
     // Asychronous
     bookingsAPI.list()
@@ -130,11 +142,19 @@ class App extends Component {
       .catch(error => {
         this.setState({ error })
       })
+
+      usersAPI.list()
+      .then(users => {
+        this.setState({ users })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
     }
 
 
   render() {
-    const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber } = this.state
+    const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber, users } = this.state
     return (
       <Router>
         <main>
@@ -187,6 +207,14 @@ class App extends Component {
                   aqps={ aqps }
                   onCreateAQP={this.handleCreateAQP}
                   onDeleteAQP={this.handleDeleteAQP}
+                />
+              )
+            } />
+            <Route path='/users' render={
+              () => (
+                <UsersPage
+                  users={ users }
+                  onArchiveUser={this.handleArchiveUser}
                 />
               )
             } />
