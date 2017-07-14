@@ -1,5 +1,6 @@
 import React from 'react'
 import Field from './Field'
+import readAndClearForm from './readAndClearForm'
 
 const formStyle = {
   display: 'flex',
@@ -13,28 +14,36 @@ function submitSignUp(event, onSignUp) {
   // Get <form>
   const form = event.target
   // Get values from the field
-  const aqpNumber = form.elements['aqpNumber'].value
-  const businessName = form.elements['businessName'].value
   const email = form.elements['email'].value
   const password = form.elements['password'].value
   const firstName = form.elements['firstName'].value
   const lastName = form.elements['lastName'].value
   const phoneNumber = form.elements['phoneNumber'].value
+
+  const e = document.getElementById('aqpList')
+  const aqpNumber = e.options[e.selectedIndex].value
+
+  const aqpValues = readAndClearForm(form)
   // Call the onSignIn function with our values
-  onSignUp({ aqpNumber, businessName, email, password, firstName, lastName, phoneNumber })
+  onSignUp({ aqpNumber, email, password, firstName, lastName, phoneNumber })
 }
 
 export default function SignUpForm({
-  onSignUp
+  onSignUp,
+  aqps,
+  onSelectAqpNumber
 }) {
   return (
     <form
       onSubmit={ (event) => submitSignUp(event, onSignUp) }
       style={ formStyle }
     >
-      <Field label='AQP Number *' name='aqpNumber' type='text' />
-      <Field label='Business Name' name='businessName' type='string' />
-
+      <label>
+        Select your Approved Quarantine Place
+        <select onChange={onSelectAqpNumber} id='aqpList'>
+          {(aqps || []).map(aqp => <option value={aqp.aqpNumber}>{aqp.aqpNumber}</option>)}
+        </select>
+      </label>
       <Field label='Email *' name='email' type='text' />
       <Field label='Password *' name='password' type='password' />
 

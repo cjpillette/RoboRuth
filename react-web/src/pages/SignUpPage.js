@@ -4,14 +4,16 @@ import SignUpForm from '../components/SignUpForm'
 
 const SignUpPage = ({
     token,
-    onSignUp
+    onSignUp,
+    aqps,
+    onSelectAqpNumber
 }) => (
     <div>
     {
         !!token ? (
             <Redirect to='/' />
         ) : (
-            <SignUpForm onSignUp={ onSignUp } />
+            <SignUpForm onSignUp={ onSignUp } aqps={ aqps } onSelectAqpNumber={ onSelectAqpNumber }/>
         )
     }
     </div>

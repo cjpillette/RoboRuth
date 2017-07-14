@@ -1,24 +1,24 @@
 const express = require('express')
-const Aqp = require('../models/aqp')
+const User = require('../models/user')
 
 const router = express.Router()
 
 router
-.route('/aqps')
+.route('/users')
 .get((req, res) => {
-    Aqp.find()
-        .then(aqps => {
-            res.json(aqps)
+    User.find()
+        .then(users => {
+            res.json(users)
         })
         .then(error => {
             res.json({ error })
         })
 })
 .post((req, res) => {
-    const newAqp = req.body
-    Aqp.create(newAqp)
-        .then(aqp => {
-            res.json(aqp)
+    const newUser = req.body
+    User.create(newUser)
+        .then(user => {
+            res.json(user)
         })
         .then(error => {
             res.json({ error })
@@ -27,29 +27,32 @@ router
 
 router
 .param('id', (req, res, next, id) => {
-    req.itemQuery = Aqp.findById(id)
+    req.itemQuery = User.findById(id)
     next()
 })
 
-router.route('/aqps/:id')
+router.route('/users/:id')
 .get((req, res) => {
     req.itemQuery
-        .then(aqp => {
-            res.json(aqp)
+        .then(user => {
+            res.json(user)
         })
         .catch(error => {
             res.status(404).json({ error })
         })
 })
-.put((req, res) => {
-    const newAqp = req.body
-    req.itemQuery.update(newAqp)
-        .then(() => {
-            res.json(newAqp)
+.patch((req, res) => {
+    const { isArchived } = req.body
+    req.itemQuery.update({
+      isArchived
+    })
+        .then(data => {
+            res.json(data)
         })
         .catch(error => {
             res.status(404).json({ error })
         })
+
 })
 .delete((req, res) => {
     req.itemQuery.remove()

@@ -5,6 +5,7 @@ const cors = require('cors')
 const authMiddleware = require('./middleware/auth')
 const bookingsRouter = require('./routes/bookings')
 const aqpsRouter = require('./routes/aqps')
+const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 
 // Create server
@@ -23,6 +24,7 @@ server.use(cors({
 server.use([
     bookingsRouter,
     aqpsRouter,
+    usersRouter,
     authRouter
 ])
 
