@@ -102,6 +102,25 @@ class App extends Component {
     aqpsAPI.destroy(id)
   }
 
+  componentDidMount() {
+    // Asychronous
+    bookingsAPI.list()
+      .then(bookings => {
+        this.setState({ bookings })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+
+      aqpsAPI.list()
+      .then(aqps => {
+        this.setState({ aqps })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+    }
+
 
   render() {
     const { error, token, bookings, dateSelected, selectInspValue, aqps } = this.state
@@ -167,17 +186,6 @@ class App extends Component {
     )
   }
 
-  componentDidMount() {
-    // Asychronous
-    bookingsAPI.list()
-      .then(bookings => {
-        // Happens some time in the future
-        this.setState({ bookings })
-      })
-      .catch(error => {
-        this.setState({ error })
-      })
-  }
 }
 
 export default App

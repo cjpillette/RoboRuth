@@ -16,7 +16,6 @@ router
 })
 .post((req, res) => {
     const newAqp = req.body
-    console.log('newAqp', newAqp)
     Aqp.create(newAqp)
         .then(aqp => {
             res.json(aqp)
