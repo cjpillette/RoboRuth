@@ -17,8 +17,11 @@ export default function User({
       <p>First name: { firstName }</p>
       <p>Last name: { lastName }</p>
       <p>Contact number: { phoneNumber }</p>
-      <p>Is archived: { isArchived }</p>
-    
+      {
+        (isArchived)
+        ? <p>Contact Archived</p>
+        : <p>Contact Active</p>
+      }
     </article>
   )
 }
