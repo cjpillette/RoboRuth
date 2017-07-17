@@ -3,7 +3,8 @@ import UserDetails from './UserDetails'
 
 export default function UsersList({
   items,
-  onArchiveUser
+  onArchiveUser,
+  onDeleteUser
 }) {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function UsersList({
             showLink
           />
           <button onClick={() => onArchiveUser(item._id)} className="btn btn-red-long">Archive</button>
+          <button onClick={() => onDeleteUser(item._id)} className="btn btn-red-long">Delete</button>
         </div>
       ))
     }

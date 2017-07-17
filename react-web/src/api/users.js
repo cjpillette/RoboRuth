@@ -15,3 +15,7 @@ export function create({
 export function archive(id) {
     return api.patch(`/users/${id}`, { isArchived: true }).then(res => res.data)
 }
+
+export function destroy(id) {
+    return api.delete(`/users/${id}`).then(res => ({}))
+}

@@ -54,28 +54,6 @@ class App extends Component {
     this.setState({selectAqpNumber: e.target.value})
   }
 
-  handleSignIn = ({ email, password }) => {
-    authAPI.signIn({ email, password })
-      .then(json => {
-        this.setState({ token: json.token })
-      })
-      .catch(error => {
-        this.setState({ error })
-      })
-  }
-
-  handleSignUp = ({ aqpNumber, email, password, firstName, lastName, phoneNumber}) => {
-    authAPI.register({
-      aqpNumber, email, password, firstName, lastName, phoneNumber
-    })
-      .then(json => {
-        this.setState({ token: json.token })
-      })
-      .catch(error => {
-        this.setState({ error })
-      })
-  }
-
   handleCreateBooking = (booking) => {
     this.setState(({ bookings }) => ({
       bookings: [ booking ].concat(bookings)
@@ -110,13 +88,44 @@ class App extends Component {
     aqpsAPI.destroy(id)
   }
 
+  handleSignIn = ({ email, password }) => {
+    authAPI.signIn({ email, password })
+      .then(json => {
+        this.setState({ token: json.token })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+  }
+
+  handleSignUp = ({ aqpNumber, email, password, firstName, lastName, phoneNumber}) => {
+    authAPI.register({
+      aqpNumber, email, password, firstName, lastName, phoneNumber
+    })
+      .then(json => {
+        this.setState({ token: json.token })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+  }
+
   handleArchiveUser = (id) => {
-    const users = this.state.bookings.filter((user) => {
+    const users = this.state.users.map((user) => {
       return user._id !== id;
     });
     this.setState({ users: users });
 
     usersAPI.archive(id)
+  }
+
+  handleDeleteUser = (id) => {
+    const users = this.state.users.filter((user) => {
+      return user._id !== id;
+    });
+    this.setState({ users: users });
+
+    usersAPI.destroy(id)
   }
 
   componentDidMount() {
@@ -215,6 +224,7 @@ class App extends Component {
                 <UsersPage
                   users={ users }
                   onArchiveUser={this.handleArchiveUser}
+                  onDeleteUser={this.handleDeleteUser}
                 />
               )
             } />

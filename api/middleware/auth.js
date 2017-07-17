@@ -63,9 +63,13 @@ passport.use(
 
 // Register new user
 function registerMiddleware(req, res, next) {
-  console.log('registerMiddleware', req.body)
+  console.log('Req.body', req.body)
   const user = new User({
-    email: req.body.email
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    phoneNumber: req.body.phoneNumber,
+    isArchived: req.body.isArchived
   })
   User.register(user, req.body.password, (error, user) => {
     // Error in registration
