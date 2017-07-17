@@ -17,7 +17,7 @@ export default function UsersList({
           />
 
           {
-            (item.isArchived)
+            !(item.isArchived)
             ? <button onClick={() => onArchiveUser(item._id)} className="btn btn-red-long">Archive</button>
             : <div></div>
           }
