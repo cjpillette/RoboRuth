@@ -1,5 +1,6 @@
 import React from 'react'
 import Field from './Field'
+import Image from './Image'
 import moment from 'moment'
 import readAndClearForm from './readAndClearForm'
 
@@ -39,7 +40,7 @@ export default function CreateBookingForm({
           <option value="exportCert">Export Certification</option>
         </select>
         <Field label='Entry Number' name='entryNumber' />
-        <Field label='Attachment' name='attachment' />
+        <Image label='Attachment' name='attachment' />
         <Field label='Comments' name='noteToOfficer' type='textarea' />
         <button type='submit' className='btn btn-submit'>Create Booking</button>
       </form>
