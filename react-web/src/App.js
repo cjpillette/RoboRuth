@@ -195,6 +195,7 @@ class App extends Component {
                   onSignUp={ this.handleSignUp }
                   aqps = { aqps }
                   onSelectAqpNumber={this.handleAqpSelection}
+                  selectAqpNumber={ selectAqpNumber }
                 />
               )
             } />

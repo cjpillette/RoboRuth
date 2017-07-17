@@ -7,7 +7,7 @@ export default function User({
   lastName,
   phoneNumber,
   isArchived,
-  aqp,
+  aqpNumber,
   showLink = false
 }) {
 
@@ -22,6 +22,7 @@ export default function User({
         ? <p>Contact Archived</p>
         : <p>Contact Active</p>
       }
+      <p>{ aqpNumber }</p>
     </article>
   )
 }

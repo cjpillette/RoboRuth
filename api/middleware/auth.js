@@ -69,7 +69,8 @@ function registerMiddleware(req, res, next) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phoneNumber: req.body.phoneNumber,
-    isArchived: req.body.isArchived
+    isArchived: req.body.isArchived,
+    aqpNumber: req.body.aqpNumber
   })
   User.register(user, req.body.password, (error, user) => {
     // Error in registration

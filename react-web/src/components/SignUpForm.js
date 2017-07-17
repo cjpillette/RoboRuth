@@ -23,7 +23,7 @@ function submitSignUp(event, onSignUp) {
   const e = document.getElementById('aqpList')
   const aqpNumber = e.options[e.selectedIndex].value
 
-  const aqpValues = readAndClearForm(form)
+  const userValues = readAndClearForm(form)
   // Call the onSignIn function with our values
   onSignUp({ aqpNumber, email, password, firstName, lastName, phoneNumber })
 }
