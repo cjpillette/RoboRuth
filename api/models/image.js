@@ -1,5 +1,4 @@
-
-const mongoose = require('./init')
+const mongoose = require('../db/db')
 
 //path and originalname are the fields stored in mongoDB
 var imageSchema = mongoose.Schema({

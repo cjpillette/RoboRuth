@@ -9,12 +9,12 @@ function submitCreate(event, onCreate, dateSelected) {
 
     const form = event.target
     const entryNumber = form.elements['entryNumber'].value
-    const attachment = form.elements['attachment'].value
+   // const attachment = form.elements['attachment'].value
     const noteToOfficer = form.elements['noteToOfficer'].value
     const e = document.getElementById('inspectionType')
     const inspectionType = e.options[e.selectedIndex].text
     const bookingValues = readAndClearForm(form)
-    onCreate({entryNumber, attachment, noteToOfficer, inspectionType, dateSelected })
+    onCreate({entryNumber, noteToOfficer, inspectionType, dateSelected })
 }
 
 export default function CreateBookingForm({
