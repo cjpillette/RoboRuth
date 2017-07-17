@@ -64,9 +64,9 @@ class App extends Component {
       })
   }
 
-  handleSignUp = ({ aqpNumber, businessName, email, password, firstName, lastName, phoneNumber}) => {
+  handleSignUp = ({ aqpNumber, email, password, firstName, lastName, phoneNumber}) => {
     authAPI.register({
-      aqpNumber, businessName, email, password, firstName, lastName, phoneNumber
+      aqpNumber, email, password, firstName, lastName, phoneNumber
     })
       .then(json => {
         this.setState({ token: json.token })
