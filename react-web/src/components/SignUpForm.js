@@ -21,11 +21,11 @@ function submitSignUp(event, onSignUp) {
   const phoneNumber = form.elements['phoneNumber'].value
 
   const e = document.getElementById('aqpList')
-  const aqpNumber = e.options[e.selectedIndex].value
+  const aqp = e.options[e.selectedIndex].value
 
   const userValues = readAndClearForm(form)
   // Call the onSignIn function with our values
-  onSignUp({ aqpNumber, email, password, firstName, lastName, phoneNumber })
+  onSignUp({ aqp, email, password, firstName, lastName, phoneNumber })
 }
 
 export default function SignUpForm({
@@ -41,7 +41,7 @@ export default function SignUpForm({
       <label>
         Select your Approved Quarantine Place
         <select onChange={onSelectAqpNumber} id='aqpList'>
-          {(aqps || []).map(aqp => <option value={aqp.aqpNumber}>{aqp.aqpNumber}</option>)}
+          {(aqps || []).map(aqp => <option value={aqp._id}>{aqp.aqpNumber}</option>)}
         </select>
       </label>
       <Field label='Email *' name='email' type='text' />

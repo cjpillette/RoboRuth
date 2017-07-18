@@ -7,9 +7,9 @@ export function signIn({ email, password }) {
     }).then(res => res.data)
 }
 
-export function register({ aqpNumber, email, password, firstName, lastName, phoneNumber }) {
+export function register({ aqp, email, password, firstName, lastName, phoneNumber }) {
     return api.post('/auth/register', {
-        aqpNumber,
+        aqp,
         email,
         password,
         firstName,

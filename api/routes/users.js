@@ -7,6 +7,7 @@ router
 .route('/users')
 .get((req, res) => {
     User.find()
+        .populate('aqp')
         .then(users => {
             res.json(users)
         })
@@ -34,6 +35,7 @@ router
 router.route('/users/:id')
 .get((req, res) => {
     req.itemQuery
+        .populate('aqp')
         .then(user => {
             res.json(user)
         })
