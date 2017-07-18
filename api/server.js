@@ -7,6 +7,7 @@ const bookingsRouter = require('./routes/bookings')
 const aqpsRouter = require('./routes/aqps')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
+const imageRouter = require('./routes/imageRouter')
 
 // Create server
 const server = express()
@@ -24,8 +25,9 @@ server.use(cors({
 server.use([
     bookingsRouter,
     aqpsRouter,
-    usersRouter,
-    authRouter
+    authRouter,
+    imageRouter
+
 ])
 
 // Route to quickly set database up

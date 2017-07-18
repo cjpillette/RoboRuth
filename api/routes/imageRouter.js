@@ -9,7 +9,7 @@ const router = express.Router()
 var upload = multer({
   storage: imager({
     dirname: 'uploads',
-    bucket: 'roboruth-cfa2',
+    bucket: 'cfa-roboruth-cj-crs',
     accessKeyId: process.env.S3_KEY,
     secretAccessKey: process.env.S3_SECRET,
     region: 'ap-southeast-2',
@@ -17,7 +17,7 @@ var upload = multer({
       width: 200,                         // doc: http://aheckmann.github.io/gm/docs.html#resize
       height: 200,
       options: '!',
-      format: 'pdf'                       // Default: jpg
+      format: 'jpg'                       // Default: jpg
     },
     // s3 : {                                // [Optional]: define s3 options
     //   Metadata: {                         // http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html
@@ -43,7 +43,7 @@ let storage = multer.diskStorage({
 // });
 
 router.post('/images', upload.single('image'), function(req, res, next) {
-  // res.send(req.file);
+   console.log(req.file);
   const location = req.file.location;
   const imageName = req.file.originalname;
   

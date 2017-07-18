@@ -1,4 +1,4 @@
-const mongoose = require('../db/db')
+const mongoose = require('../db/db');
 
 
 const bookingSchema = mongoose.Schema({
@@ -11,8 +11,8 @@ const bookingSchema = mongoose.Schema({
     noteToOfficer: String,
     dateSelected: Date,
     attachment: [ {type: String }]
-})
+});
 
-const Booking = mongoose.model('Booking', bookingSchema)
+const Booking = mongoose.model('Booking', bookingSchema);
 
-module.exports = Booking
+module.exports = Booking;
