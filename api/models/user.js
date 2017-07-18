@@ -7,9 +7,10 @@ const userSchema = mongoose.Schema({
   lastName: String,
   phoneNumber: String,
   role: String,
-  company: {
+  isArchived: Boolean,
+  aqp: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Company'
+      ref: 'Aqp'
   },
 });
 // Add email, password hash, salt, etc fields to our user schema

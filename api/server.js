@@ -5,6 +5,7 @@ const cors = require('cors')
 const authMiddleware = require('./middleware/auth')
 const bookingsRouter = require('./routes/bookings')
 const aqpsRouter = require('./routes/aqps')
+const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 const imageRouter = require('./routes/imageRouter')
 
@@ -26,6 +27,7 @@ server.use([
     aqpsRouter,
     authRouter,
     imageRouter
+
 ])
 
 // Route to quickly set database up

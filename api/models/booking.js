@@ -6,10 +6,6 @@ const bookingSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    aqp: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Aqp'
-    },
     inspectionType: String,
     entryNumber: String,
     noteToOfficer: String,

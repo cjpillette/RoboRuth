@@ -8,6 +8,7 @@ import './App.css'
 import PrimaryNav from './components/PrimaryNav'
 import BookingsPage from './pages/BookingsPage'
 import AQPsPage from './pages/AQPsPage'
+import UsersPage from './pages/UsersPage'
 import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
 import MainCalendar from './components/MainCalendar'
@@ -15,6 +16,7 @@ import moment from 'moment'
 import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
 import * as aqpsAPI from './api/aqps'
+import * as usersAPI from './api/users'
 
 class App extends Component {
   // Initial state
@@ -24,7 +26,9 @@ class App extends Component {
     bookings: null, // Null means not loaded yet
     dateSelected: null,
     selectInspValue: null,
-    aqps: null
+    selectAqpNumber: null,
+    aqps: null,
+    users: null
   }
 
   handleSelectDay = (dateSelected) => {
@@ -44,6 +48,10 @@ class App extends Component {
 
   handleInspectionSelection = (e) => {
     this.setState({selectInspValue: e.target.value})
+  }
+
+  handleAqpSelection = (e) => {
+    this.setState({selectAqpNumber: e.target.value})
   }
 
   handleSignIn = ({ email, password }) => {
@@ -102,9 +110,51 @@ class App extends Component {
     aqpsAPI.destroy(id)
   }
 
+  handleArchiveUser = (id) => {
+    const users = this.state.bookings.filter((user) => {
+      return user._id !== id;
+    });
+    this.setState({ users: users });
+
+    usersAPI.archive(id)
+  }
+
+  componentDidMount() {
+    // Asychronous
+    bookingsAPI.list()
+      .then(bookings => {
+        const sorted_bookings = bookings.sort((a, b) => {
+            a = new Date(a.dateSelected);
+            b = new Date(b.dateSelected);
+            return a<b ? -1 : a>b ? 1 : 0;
+          }
+        )
+        this.setState({ bookings: sorted_bookings })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+
+      aqpsAPI.list()
+      .then(aqps => {
+        this.setState({ aqps })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+
+      usersAPI.list()
+      .then(users => {
+        this.setState({ users })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+    }
+
 
   render() {
-    const { error, token, bookings, dateSelected, selectInspValue, aqps } = this.state
+    const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber, users } = this.state
     return (
       <Router>
         <main>
@@ -134,6 +184,8 @@ class App extends Component {
                 <SignUpPage
                   token={ token }
                   onSignUp={ this.handleSignUp }
+                  aqps = { aqps }
+                  onSelectAqpNumber={this.handleAqpSelection}
                 />
               )
             } />
@@ -158,6 +210,14 @@ class App extends Component {
                 />
               )
             } />
+            <Route path='/users' render={
+              () => (
+                <UsersPage
+                  users={ users }
+                  onArchiveUser={this.handleArchiveUser}
+                />
+              )
+            } />
             <Route render={
               ({ location }) => <p>{ location.pathname } not found</p>
             } />
@@ -167,17 +227,6 @@ class App extends Component {
     )
   }
 
-  componentDidMount() {
-    // Asychronous
-    bookingsAPI.list()
-      .then(bookings => {
-        // Happens some time in the future
-        this.setState({ bookings })
-      })
-      .catch(error => {
-        this.setState({ error })
-      })
-  }
 }
 
 export default App

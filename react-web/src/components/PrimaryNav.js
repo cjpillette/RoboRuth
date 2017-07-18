@@ -8,5 +8,6 @@ export default () => (
         <NavLink to='/register'  activeClassName='active'>Sign Up</NavLink>
         <NavLink to='/bookings'  activeClassName='active'>Bookings</NavLink>
         <NavLink to='/aqps'  activeClassName='active'>AQPs</NavLink>
+        <NavLink to='/users'  activeClassName='active'>Users</NavLink>
     </nav>
 )
