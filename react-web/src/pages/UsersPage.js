@@ -5,7 +5,8 @@ import UsersList from '../components/UsersList'
 
 const UsersPage = ({
     users,
-    onArchiveUser
+    onArchiveUser,
+    onDeleteUser
 }) => (
     <div>
     {
@@ -27,7 +28,7 @@ const UsersPage = ({
                 } />
                 <Route path='/users' render={
                     () => (
-                        <UsersList items={ users } onArchiveUser={ onArchiveUser }/>
+                        <UsersList items={ users } onArchiveUser={ onArchiveUser } onDeleteUser ={ onDeleteUser }/>
                     )
                   }
                 />

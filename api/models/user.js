@@ -6,7 +6,11 @@ const userSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
   phoneNumber: String,
-  role: String,
+  role: {
+    type: String,
+    enum: ['Client', 'Admin'],
+    default: 'Client'
+  },
   isArchived: Boolean,
   aqp: {
       type: mongoose.Schema.Types.ObjectId,

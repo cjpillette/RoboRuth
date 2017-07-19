@@ -6,14 +6,15 @@ const SignUpPage = ({
     token,
     onSignUp,
     aqps,
-    onSelectAqpNumber
+    onSelectAqpNumber,
+    selectAqpNumber
 }) => (
     <div>
     {
         !!token ? (
             <Redirect to='/' />
         ) : (
-            <SignUpForm onSignUp={ onSignUp } aqps={ aqps } onSelectAqpNumber={ onSelectAqpNumber }/>
+            <SignUpForm onSignUp={ onSignUp } aqps={ aqps } onSelectAqpNumber={ onSelectAqpNumber } selectAqpNumber={ selectAqpNumber }/>
         )
     }
     </div>
