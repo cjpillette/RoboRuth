@@ -4,6 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import decodeJWT from 'jwt-decode'
 import './App.css'
 import PrimaryNav from './components/PrimaryNav'
 import BookingsPage from './pages/BookingsPage'
@@ -115,7 +116,7 @@ class App extends Component {
       return user._id !== id;
     });
     this.setState({ users: users });
-  
+
     usersAPI.archive(id)
   }
 
@@ -164,10 +165,11 @@ class App extends Component {
 
   render() {
     const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber, users } = this.state
+    const userInfo = !!token ? decodeJWT(token) : null
     return (
       <Router>
         <main>
-          <PrimaryNav />
+          <PrimaryNav isSignedIn={ !!token } />
           { !!error && <p>{ error.message }</p> }
 
           <Switch>
