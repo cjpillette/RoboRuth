@@ -19,11 +19,13 @@ import * as bookingsAPI from './api/bookings'
 import * as aqpsAPI from './api/aqps'
 import * as usersAPI from './api/users'
 
+const tokenKey = 'userToken'
+
 class App extends Component {
   // Initial state
   state = {
     error: null,
-    token: null,
+    token: localStorage.getItem(tokenKey),
     bookings: null, // Null means not loaded yet
     dateSelected: null,
     selectInspValue: null,
@@ -89,10 +91,20 @@ class App extends Component {
     aqpsAPI.destroy(id)
   }
 
+  setToken = (token) => {
+    if (token) {
+      localStorage.setItem(tokenKey, token)
+    }
+    else {
+      localStorage.removeItem(tokenKey)
+    }
+    this.setState({ token: token })
+  }
+
   handleSignIn = ({ email, password }) => {
     authAPI.signIn({ email, password })
       .then(json => {
-        this.setState({ token: json.token })
+        this.setToken(json.token)
       })
       .catch(error => {
         this.setState({ error })
@@ -104,7 +116,7 @@ class App extends Component {
       aqp, email, password, firstName, lastName, phoneNumber
     })
       .then(json => {
-        this.setState({ token: json.token })
+        this.setToken(json.token)
       })
       .catch(error => {
         this.setState({ error })
@@ -112,7 +124,7 @@ class App extends Component {
   }
 
   handleSignOut = () => {
-    this.setState({ token: null })
+    this.setState(null)
   }
 
   handleArchiveUser = (id) => {
