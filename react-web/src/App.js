@@ -19,14 +19,19 @@ import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
 import * as aqpsAPI from './api/aqps'
 import * as usersAPI from './api/users'
+import { setAPIToken } from './api/init'
 
 const tokenKey = 'userToken'
+//Read the last token from the local storage database
+const savedToken = localStorage.getItem(tokenKey)
+//Set the token on the API headers
+setAPIToken(savedToken)
 
 class App extends Component {
   // Initial state
   state = {
     error: null,
-    token: localStorage.getItem(tokenKey),
+    token: savedToken,
     bookings: null, // Null means not loaded yet
     dateSelected: null,
     selectInspValue: null,
@@ -34,6 +39,8 @@ class App extends Component {
     aqps: null,
     users: null
   }
+
+  loadPromises = {}
 
   handleSelectDay = (dateSelected) => {
     this.setState({dateSelected})
@@ -99,6 +106,7 @@ class App extends Component {
     else {
       localStorage.removeItem(tokenKey)
     }
+    setAPIToken(token)
     this.setState({ token: token })
   }
 
@@ -146,6 +154,21 @@ class App extends Component {
     usersAPI.destroy(id)
   }
 
+  loadAQP = () => {
+    //don't load again and again
+    if (this.loadPromises.listAQPs) {
+      return
+    }
+
+    this.loadPromises.listAQPs = aqpsAPI.list()
+    .then(aqps => {
+      this.setState({ aqps })
+    })
+    .catch(error => {
+      this.setState({ error })
+    })
+  }
+
   componentDidMount() {
     // Asychronous
     bookingsAPI.list()
@@ -157,14 +180,6 @@ class App extends Component {
           }
         )
         this.setState({ bookings: sorted_bookings })
-      })
-      .catch(error => {
-        this.setState({ error })
-      })
-
-      aqpsAPI.list()
-      .then(aqps => {
-        this.setState({ aqps })
       })
       .catch(error => {
         this.setState({ error })
@@ -231,13 +246,16 @@ class App extends Component {
               )
             } />
             <Route path='/aqps' render={
-              () => (
-                <AQPsPage
+              () => {
+                this.loadAQP()
+                return (
+                  <AQPsPage
                   aqps={ aqps }
                   onCreateAQP={this.handleCreateAQP}
                   onDeleteAQP={this.handleDeleteAQP}
-                />
-              )
+                  />
+                )
+              }
             } />
             <Route path='/users' render={
               () => (
