@@ -115,7 +115,7 @@ class App extends Component {
       return user._id !== id;
     });
     this.setState({ users: users });
-
+  
     usersAPI.archive(id)
   }
 

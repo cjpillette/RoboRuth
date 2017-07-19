@@ -5,10 +5,10 @@ export function list() {
 }
 
 export function create({
-  email, firstName, lastName, phoneNumber, isArchived
+  email, firstName, lastName, phoneNumber, isArchived, aqp
  }) {
     return api.post('/users', {
-      email, firstName, lastName, phoneNumber, isArchived
+      email, firstName, lastName, phoneNumber, isArchived, aqp
     }).then(res => res.data)
 }
 

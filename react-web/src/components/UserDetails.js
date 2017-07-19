@@ -7,6 +7,7 @@ export default function User({
   lastName,
   phoneNumber,
   isArchived,
+  role,
   aqp,
   showLink = false
 }) {
@@ -22,7 +23,8 @@ export default function User({
         ? <p>Contact Archived</p>
         : <p>Contact Active</p>
       }
-      <p>{ !!aqp ? aqp.aqpNumber : null }</p>
+      <p>working at: { !!aqp ? aqp.businessName : null }</p>
+      <p>Role: { role }</p>
     </article>
   )
 }
