@@ -111,6 +111,10 @@ class App extends Component {
       })
   }
 
+  handleSignOut = () => {
+    this.setState({ token: null })
+  }
+
   handleArchiveUser = (id) => {
     const users = this.state.users.map((user) => {
       return user._id !== id;
@@ -169,7 +173,7 @@ class App extends Component {
     return (
       <Router>
         <main>
-          <PrimaryNav isSignedIn={ !!token } />
+          <PrimaryNav isSignedIn={ !!token } onSignOut={this.handleSignOut} />
           { !!error && <p>{ error.message }</p> }
 
           <Switch>
