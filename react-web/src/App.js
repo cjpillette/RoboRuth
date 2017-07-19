@@ -5,6 +5,7 @@ import {
   Switch
 } from 'react-router-dom'
 import decodeJWT from 'jwt-decode'
+import moment from 'moment'
 import './App.css'
 import PrimaryNav from './components/PrimaryNav'
 import BookingsPage from './pages/BookingsPage'
@@ -13,7 +14,7 @@ import UsersPage from './pages/UsersPage'
 import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
 import MainCalendar from './components/MainCalendar'
-import moment from 'moment'
+import ErrorMessage from './components/ErrorMessage'
 import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
 import * as aqpsAPI from './api/aqps'
@@ -186,7 +187,7 @@ class App extends Component {
       <Router>
         <main>
           <PrimaryNav isSignedIn={ !!token } onSignOut={this.handleSignOut} />
-          { !!error && <p>{ error.message }</p> }
+          { !!error && <ErrorMessage error={ error } /> }
 
           <Switch>
             <Route exact path='/' render={
