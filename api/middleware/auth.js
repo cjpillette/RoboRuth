@@ -24,6 +24,7 @@ function signTokenHandler(req, res) {
   const token = jwt.sign(
     { // Payload
       email: user.email,
+      firstName: user.firstName,
       role: roleForUser(user)
     },
     jwtSecret,
@@ -62,6 +63,7 @@ passport.use(
             done(null, {
               _id: user._id,
               email: user.email,
+              firstName: user.firstName,
               role: jwtPayload.role
             })
           }

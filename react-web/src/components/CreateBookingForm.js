@@ -3,7 +3,7 @@ import Field from './Field'
 import moment from 'moment'
 import readAndClearForm from './readAndClearForm'
 
-function submitCreate(event, onCreate, dateSelected) {
+function submitCreate(event, onCreate, dateSelected, email) {
     event.preventDefault()
 
     const form = event.target
@@ -13,21 +13,22 @@ function submitCreate(event, onCreate, dateSelected) {
     const e = document.getElementById('inspectionType')
     const inspectionType = e.options[e.selectedIndex].text
     const bookingValues = readAndClearForm(form)
-    onCreate({entryNumber, attachment, noteToOfficer, inspectionType, dateSelected })
+    onCreate({entryNumber, attachment, noteToOfficer, inspectionType, dateSelected, email })
 }
 
 export default function CreateBookingForm({
     onCreate,
     dayTimeSelected,
     selectInspValue,
-    onSelectInspection
+    onSelectInspection,
+    email
 }) {
   const dateSelected = moment(dayTimeSelected).format("LLLL").toString();
 
   return (
     <div>
       <h2>Booking for {dateSelected} </h2>
-      <form onSubmit={ (event) => submitCreate(event, onCreate, dateSelected) }>
+      <form onSubmit={ (event) => submitCreate(event, onCreate, dateSelected, email) }>
         <select
         value={selectInspValue}
         onChange={onSelectInspection}

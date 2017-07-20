@@ -207,6 +207,13 @@ class App extends Component {
   render() {
     const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber, users } = this.state
     const userInfo = !!token ? decodeJWT(token) : null
+
+    let email = null
+    if (!!token) {
+      const payload = decodeJWT(token)
+      email = payload.email
+    }
+
     return (
       <Router>
         <main>
@@ -251,6 +258,7 @@ class App extends Component {
                   onSelectInspection={this.handleInspectionSelection}
                   selectInspValue={selectInspValue}
                   onDeleteBooking={this.handleDeleteBooking}
+                  email= { email }
                 />
               )
             } />
