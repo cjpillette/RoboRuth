@@ -7,13 +7,24 @@ const User = require('../models/user')
 const jwtSecret = 'SECRET!' // FIXME: use environment variable
 const jwtAlgorithm = 'HS256'
 
+function roleForUser(user) {
+  let roles = ['bookings:read', 'bookings:write']
+
+  //Users from the department have more capabilities
+  if (/@dpipwe.tas.gov.au$/.test(user.email)) {
+    roles.push('aqps:read', 'aqps:write')
+    roles.push('users:read', 'users:write')
+  }
+  return roles
+}
+
 // Create a valid JWT
 function signTokenHandler(req, res) {
   const user = req.user
   const token = jwt.sign(
     { // Payload
       email: user.email,
-      role: user.role
+      role: roleForUser(user)
     },
     jwtSecret,
     { // Options
@@ -48,7 +59,11 @@ passport.use(
         .then(user => {
           // User was found
           if (user) {
-            done(null, user)
+            done(null, {
+              _id: user._id,
+              email: user.email,
+              role: jwtPayload.role
+            })
           }
           // No user was found
           else {
@@ -86,12 +101,25 @@ function registerMiddleware(req, res, next) {
     // Our middleware succeeded with no error
     next()
   })
+
+  next()
 }
+
+  const ensureRole = (role) => (req, res, next) => {
+    const user = req.user
+    const roles = user.roles
+    //If the user role doens't include the required role
+    if (roles.indexOf(role) === -1) {
+      next(new Error(`User must have the role of ${role}`))
+      return
+    }
+  }
 
 module.exports = {
   initialize: passport.initialize(),
   authenticateSignIn: passport.authenticate('local', { session: false }),
   authenticateJWT: passport.authenticate('jwt', { session: false }),
   register: registerMiddleware,
-  signTokenHandler
+  signTokenHandler,
+  ensureRole
 }

@@ -102,23 +102,22 @@ class App extends Component {
 
   setToken = (token) => {
     setAPIToken(token)
+    //Forget we've ever loaded anything
+    this.loadPromises = {}
     //If signed in
     if (token) {
       localStorage.setItem(tokenKey, token)
-      this.setState({ token: token })
     }
     //If signed out
     else {
-      //Forget we've ever loaded anything
-      this.loadPromises = {}
       //Clear the token from local storage
       localStorage.removeItem(tokenKey)
+    }
       //Clear loaded data
       this.setState({
-        token: null,
+        token: token,
         aqps: null
       })
-    }
   }
 
   handleSignIn = ({ email, password }) => {

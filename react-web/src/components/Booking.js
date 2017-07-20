@@ -4,7 +4,7 @@ import moment from 'moment'
 
 export default function Booking({
   _id,
-  clientId,
+  user,
   inspectionType,
   entryNumber,
   noteToOfficer,
@@ -16,10 +16,12 @@ export default function Booking({
   return (
     <article>
       <p>On { moment(dateSelected).format('LLLL') }</p>
+      <p>For: { user }</p>
       <p>{ inspectionType }</p>
       <Link to={ `/bookings/${_id}` }>
         { entryNumber }
       </Link>
+      <p> { attachment } </p>
     </article>
   )
 }
