@@ -4,6 +4,8 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import decodeJWT from 'jwt-decode'
+import moment from 'moment'
 import './App.css'
 import PrimaryNav from './components/PrimaryNav'
 import BookingsPage from './pages/BookingsPage'
@@ -12,17 +14,24 @@ import UsersPage from './pages/UsersPage'
 import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
 import MainCalendar from './components/MainCalendar'
-import moment from 'moment'
+import ErrorMessage from './components/ErrorMessage'
 import * as authAPI from './api/auth'
 import * as bookingsAPI from './api/bookings'
 import * as aqpsAPI from './api/aqps'
 import * as usersAPI from './api/users'
+import { setAPIToken } from './api/init'
+
+const tokenKey = 'userToken'
+//Read the last token from the local storage database
+const savedToken = localStorage.getItem(tokenKey)
+//Set the token on the API headers
+setAPIToken(savedToken)
 
 class App extends Component {
   // Initial state
   state = {
     error: null,
-    token: null,
+    token: savedToken,
     bookings: null, // Null means not loaded yet
     dateSelected: null,
     selectInspValue: null,
@@ -30,6 +39,8 @@ class App extends Component {
     aqps: null,
     users: null
   }
+
+  loadPromises = {}
 
   handleSelectDay = (dateSelected) => {
     this.setState({dateSelected})
@@ -73,7 +84,8 @@ class App extends Component {
 
   handleCreateAQP = (aqp) => {
     this.setState(({ aqps }) => ({
-      aqps: [ aqp ].concat(aqps || [])
+      aqps: [ aqp ].concat(aqps || []),
+      error: null
     }))
 
     aqpsAPI.create(aqp)
@@ -88,10 +100,31 @@ class App extends Component {
     aqpsAPI.destroy(id)
   }
 
+  setToken = (token) => {
+    setAPIToken(token)
+    //If signed in
+    if (token) {
+      localStorage.setItem(tokenKey, token)
+      this.setState({ token: token })
+    }
+    //If signed out
+    else {
+      //Forget we've ever loaded anything
+      this.loadPromises = {}
+      //Clear the token from local storage
+      localStorage.removeItem(tokenKey)
+      //Clear loaded data
+      this.setState({
+        token: null,
+        aqps: null
+      })
+    }
+  }
+
   handleSignIn = ({ email, password }) => {
     authAPI.signIn({ email, password })
       .then(json => {
-        this.setState({ token: json.token })
+        this.setToken(json.token)
       })
       .catch(error => {
         this.setState({ error })
@@ -103,19 +136,29 @@ class App extends Component {
       aqp, email, password, firstName, lastName, phoneNumber
     })
       .then(json => {
-        this.setState({ token: json.token })
+        this.setToken(json.token)
       })
       .catch(error => {
         this.setState({ error })
       })
   }
 
+  handleSignOut = () => {
+    this.setToken(null)
+  }
+
   handleArchiveUser = (id) => {
-    const users = this.state.users.map((user) => {
-      return user._id !== id;
-    });
+    const users = this.state.users.map((user) => (
+      user._id === id ? (
+        // Archive
+        Object.assign({}, user, { isArchived: true })
+      ) : (
+        // Leave Britney alone
+        user
+      )
+    ));
     this.setState({ users: users });
-  
+
     usersAPI.archive(id)
   }
 
@@ -164,11 +207,12 @@ class App extends Component {
 
   render() {
     const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber, users } = this.state
+    const userInfo = !!token ? decodeJWT(token) : null
     return (
       <Router>
         <main>
-          <PrimaryNav />
-          { !!error && <p>{ error.message }</p> }
+          <PrimaryNav isSignedIn={ !!token } onSignOut={this.handleSignOut} />
+          { !!error && <ErrorMessage error={ error } /> }
 
           <Switch>
             <Route exact path='/' render={
@@ -213,13 +257,14 @@ class App extends Component {
             } />
             <Route path='/aqps' render={
               () => (
-                <AQPsPage
+                  <AQPsPage
                   aqps={ aqps }
                   onCreateAQP={this.handleCreateAQP}
                   onDeleteAQP={this.handleDeleteAQP}
-                />
-              )
-            } />
+                  />
+                )
+              }
+             />
             <Route path='/users' render={
               () => (
                 <UsersPage

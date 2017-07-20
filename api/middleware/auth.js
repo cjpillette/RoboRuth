@@ -12,7 +12,8 @@ function signTokenHandler(req, res) {
   const user = req.user
   const token = jwt.sign(
     { // Payload
-      email: user.email
+      email: user.email,
+      role: user.role
     },
     jwtSecret,
     { // Options

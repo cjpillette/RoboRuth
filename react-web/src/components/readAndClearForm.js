@@ -8,8 +8,8 @@ function readAndClearForm(form) {
         // Reset <input> value
         element.value = ''
     }
-    
+
     return values
 }
 
-module.exports = readAndClearForm
+export default readAndClearForm
