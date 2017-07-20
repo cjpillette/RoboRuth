@@ -6,7 +6,7 @@ const router = express.Router()
 
 router
 .route('/aqps')
-.get(authMiddleware.authenticateJWT, (req, res) => {
+.get( (req, res) => {
     Aqp.find()
         .then(aqps => {
             res.json(aqps)

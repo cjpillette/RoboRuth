@@ -84,7 +84,8 @@ class App extends Component {
 
   handleCreateAQP = (aqp) => {
     this.setState(({ aqps }) => ({
-      aqps: [ aqp ].concat(aqps || [])
+      aqps: [ aqp ].concat(aqps || []),
+      error: null
     }))
 
     aqpsAPI.create(aqp)
@@ -100,14 +101,24 @@ class App extends Component {
   }
 
   setToken = (token) => {
+    setAPIToken(token)
+    //If signed in
     if (token) {
       localStorage.setItem(tokenKey, token)
+      this.setState({ token: token })
     }
+    //If signed out
     else {
+      //Forget we've ever loaded anything
+      this.loadPromises = {}
+      //Clear the token from local storage
       localStorage.removeItem(tokenKey)
+      //Clear loaded data
+      this.setState({
+        token: null,
+        aqps: null
+      })
     }
-    setAPIToken(token)
-    this.setState({ token: token })
   }
 
   handleSignIn = ({ email, password }) => {
@@ -133,13 +144,19 @@ class App extends Component {
   }
 
   handleSignOut = () => {
-    this.setState(null)
+    this.setToken(null)
   }
 
   handleArchiveUser = (id) => {
-    const users = this.state.users.map((user) => {
-      return user._id !== id;
-    });
+    const users = this.state.users.map((user) => (
+      user._id === id ? (
+        // Archive
+        Object.assign({}, user, { isArchived: true })
+      ) : (
+        // Leave Britney alone
+        user
+      )
+    ));
     this.setState({ users: users });
 
     usersAPI.archive(id)
@@ -154,21 +171,6 @@ class App extends Component {
     usersAPI.destroy(id)
   }
 
-  loadAQP = () => {
-    //don't load again and again
-    if (this.loadPromises.listAQPs) {
-      return
-    }
-
-    this.loadPromises.listAQPs = aqpsAPI.list()
-    .then(aqps => {
-      this.setState({ aqps })
-    })
-    .catch(error => {
-      this.setState({ error })
-    })
-  }
-
   componentDidMount() {
     // Asychronous
     bookingsAPI.list()
@@ -180,6 +182,14 @@ class App extends Component {
           }
         )
         this.setState({ bookings: sorted_bookings })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+
+      aqpsAPI.list()
+      .then(aqps => {
+        this.setState({ aqps })
       })
       .catch(error => {
         this.setState({ error })
@@ -246,9 +256,7 @@ class App extends Component {
               )
             } />
             <Route path='/aqps' render={
-              () => {
-                this.loadAQP()
-                return (
+              () => (
                   <AQPsPage
                   aqps={ aqps }
                   onCreateAQP={this.handleCreateAQP}
@@ -256,7 +264,7 @@ class App extends Component {
                   />
                 )
               }
-            } />
+             />
             <Route path='/users' render={
               () => (
                 <UsersPage
