@@ -5,6 +5,6 @@ const aqpSchema = mongoose.Schema({
     aqpNumber: String
 })
 
-const Aqp = mongoose.model('Aqp', aqpSchema)
+const Aqp = mongoose.model('Aqp', aqpSchema, 'aqp')
 
 module.exports = Aqp

@@ -13,6 +13,6 @@ const bookingSchema = mongoose.Schema({
     attachment: [ {type: String }]
 })
 
-const Booking = mongoose.model('Booking', bookingSchema)
+const Booking = mongoose.model('Booking', bookingSchema, 'booking')
 
 module.exports = Booking
