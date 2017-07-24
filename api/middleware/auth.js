@@ -8,12 +8,11 @@ const jwtSecret = 'SECRET!' // FIXME: use environment variable
 const jwtAlgorithm = 'HS256'
 
 function roleForUser(user) {
-  let roles = ['bookings:read', 'bookings:write']
+  let roles = 'Client'
 
   //Users from the department have more capabilities
   if (/@dpipwe.tas.gov.au$/.test(user.email)) {
-    roles.push('aqps:read', 'aqps:write')
-    roles.push('users:read', 'users:write')
+    roles = 'Admin'
   }
   return roles
 }
