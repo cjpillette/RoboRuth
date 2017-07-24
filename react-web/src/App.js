@@ -174,12 +174,14 @@ class App extends Component {
     // Asychronous
     bookingsAPI.list()
       .then(bookings => {
+        console.log('unsorted', bookings)
         const sorted_bookings = bookings.sort((a, b) => {
             a = new Date(a.dateSelected);
             b = new Date(b.dateSelected);
             return a<b ? -1 : a>b ? 1 : 0;
           }
         )
+        console.log('sorted', sorted_bookings)
         this.setState({ bookings: sorted_bookings })
       })
       .catch(error => {
@@ -208,11 +210,11 @@ class App extends Component {
     const { error, token, bookings, dateSelected, selectInspValue, aqps, selectAqpNumber, users } = this.state
     const userInfo = !!token ? decodeJWT(token) : null
 
-    let email = null
-    if (!!token) {
-      const payload = decodeJWT(token)
-      email = payload.email
-    }
+    // let email = null
+    // if (!!token) {
+    //   const payload = decodeJWT(token)
+    //   email = payload.email
+    // }
 
     return (
       <Router>
@@ -258,7 +260,7 @@ class App extends Component {
                   onSelectInspection={this.handleInspectionSelection}
                   selectInspValue={selectInspValue}
                   onDeleteBooking={this.handleDeleteBooking}
-                  email= { email }
+                  user= { userInfo }
                 />
               )
             } />

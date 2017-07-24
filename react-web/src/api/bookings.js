@@ -5,10 +5,10 @@ export function list() {
 }
 
 export function create({
-  inspectionType, entryNumber, noteToOfficer, dateSelected, attachment
+  inspectionType, entryNumber, noteToOfficer, dateSelected, attachment, user
  }) {
     return api.post('/bookings', {
-        inspectionType, entryNumber, noteToOfficer, dateSelected, attachment
+        inspectionType, entryNumber, noteToOfficer, dateSelected, attachment, user: user.sub
     }).then(res => res.data)
 }
 

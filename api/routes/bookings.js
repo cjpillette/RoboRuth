@@ -9,6 +9,7 @@ router
 .get((req, res) => {
     Booking.find()
         .populate('inspectionType.inspection')
+        .populate('user')
         .then(bookings => {
             res.json(bookings)
         })
@@ -18,6 +19,7 @@ router
 })
 .post((req, res) => {
     const newBooking = req.body
+    // newBooking.user = req.user._id
     Booking.create(newBooking)
         .then(booking => {
             res.json(booking)
@@ -37,6 +39,7 @@ router.route('/bookings/:id')
 .get((req, res) => {
     req.itemQuery
     .populate('inspectionType.inspection')
+    .populate('user.email')
         .then(booking => {
             res.json(booking)
         })

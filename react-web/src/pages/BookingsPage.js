@@ -11,7 +11,7 @@ const BookingsPage = ({
     onSelectInspection,
     selectInspValue,
     onDeleteBooking,
-    email
+    user
 }) => (
     <div>
         { !!dateSelected &&
@@ -20,7 +20,7 @@ const BookingsPage = ({
           dayTimeSelected={ dateSelected }
           onSelectInspection={ onSelectInspection }
           selectInspValue={ selectInspValue }
-          email = { email }
+          user = { user }
           />
         }
     {
